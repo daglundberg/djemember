@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+.sitewidth
+{
+    margin: auto;
+}
+
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+   .sitewidth { width: 95%;}
+}
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .col-m-1 {width: 8.33%;}
+    .col-m-2 {width: 16.66%;}
+    .col-m-3 {width: 25%;}
+    .col-m-4 {width: 33.33%;}
+    .col-m-5 {width: 41.66%;}
+    .col-m-6 {width: 50%;}
+    .col-m-7 {width: 58.33%;}
+    .col-m-8 {width: 66.66%;}
+    .col-m-9 {width: 75%;}
+    .col-m-10 {width: 83.33%;}
+    .col-m-11 {width: 91.66%;}
+    .col-m-12 {width: 100%;}
+
+    .sitewidth { width: 88%;}
+}
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+
+    .sitewidth { width: 75%;}
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+body{
+    background-color: white;
+    font-family: 'Raleway', sans-serif;
+    margin: 0px;
+}
+a
+{
+    color: black;
+    text-decoration: none;
+}
+
+.logo a
+{
+    font-family: 'Source Serif Pro', serif;
+    font-size: 30pt;
+}
+
+.logo
+{
+    padding-top: 80px;
+}
+.topnav a
+{
+}
+footer
+{
+    text-align: center;
+    font-size: 11pt;
+    color: #454545;
+    padding: 40px;
+}
+.writing
+{
+    padding: 10%;
+    font-family: 'IM Fell English', serif;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 135%;
+}
+.profilepic
+{
+    width: 90px;
+    height: 90px;
+    
+}
+
+.userbar
+{
+    float:right;
+}
+
+.greystatic
+{
+    text-align: center;
+    background-color: #E9E9E9;
+}
+
+.padding
+{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.centertext
+{
+    text-align: center;
+}
+
+.centerlink
+{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.white
+{
+    color: white !important;
+}
+
+.button
+{
+    background-color: #0068AC;
+    color: #fff;
+    border-radius: 5px;
+    padding: 12 24 12 24;
+}
+
+.button:hover
+{
+    background-color: #0081D5;
+    color: #fff;
+    border-radius: 5px;
+    padding: 12 24 12 24;
+}
+
+.paralax-image1{
+   /* padding-bottom: 545px;*/
+    height: 100%;
+    background-image: url('cl-walking.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.paralax-image2
+{
+    text-align: center;
+    background-color: #B4B4B4;
+        background-image: url('cl-face.jpg');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: overlay;
+}
