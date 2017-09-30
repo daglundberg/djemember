@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load cloudinary %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+{% cloudinary_includes %}
+{% cloudinary_js_config %}
+<h1>Dela ett minne</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ memoryForm.as_p }}
+        {{ cloudinaryPhotoForm.as_p }}
+        {{ pictureForm.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    {% cloudinary "sample.jpg" radius="max" width=150 height=150 crop="fill" %}
+{% endblock %}

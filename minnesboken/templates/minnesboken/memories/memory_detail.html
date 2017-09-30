@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <p>{{ memory.text }}</p>
+
+
+{% for picture in memory.picture_set.all %}
+   <img src="{{ picture.url }}" />
+   <p>{{ picture.picture_text }}</p>
+{% endfor %}
+<p>Skrivet av {{ memory.userprofile }}. Publicerat {{ memory.pub_date}}</p>
+{% endblock %}

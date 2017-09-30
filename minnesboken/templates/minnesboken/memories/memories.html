@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Minnesboken{% endblock %}
+{% block content %}
+{% if latest_memories_list %}
+
+    {% for memory in latest_memories_list %}
+    <div class="row">
+        <div class="column column-10 column-center" ><img class="column-center" src="{{ memory.userprofile.avatar_url }}"></div><a class="column" href="{% url 'memory_detail' memory.id %}">{{ memory.text }}</a>
+    </div>
+    {% endfor %}
+
+{% else %}
+    <p>No user has published a memory yet.</p>
+{% endif %}
+{% endblock %}

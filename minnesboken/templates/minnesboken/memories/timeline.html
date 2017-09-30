@@ -1,0 +1,74 @@
+{% extends 'timeline_base.html' %}
+{% load cloudinary %}
+{% block title %}Minnesboken{% endblock %}
+{% block content %}
+
+<img class="center" src="/static/christianbaby.png">
+<div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
+
+{% for memory in timeline_memories_list %}
+
+{% ifchanged memory.timeline_date.year %}
+<div><h3 class="year">{{ memory.timeline_date.year }}</h3></div>
+{% endifchanged %}
+
+
+<section  class="timelinerow">
+	<div class="lefty">
+		{% if forloop.counter|divisibleby:2 %}
+		<p class="float-right whitebox comment animate">
+			{{ memory.text }}
+			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
+		</p>
+		{% else %}
+		{% for picture in memory.picture_set.all %}	
+		<div class="thumb whitebox float-right animate">
+			{% cloudinary picture.url gravity="face" width=196 height=196 crop="fill" %}
+			<p class="picture_text">
+				{{ picture.picture_text }}
+			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
+		</div>
+		{% endfor %}
+		{% endif %}
+
+	</div>
+	<div class="righty">
+		{% if forloop.counter|divisibleby:2 %}
+		{% for picture in memory.picture_set.all %}	
+		<div class="thumb whitebox animate">
+			{% cloudinary picture.url gravity="face" width=196 height=196 crop="fill" %}
+			<p class="picture_text">
+				{{ picture.picture_text }}
+			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
+		</div>
+		{% endfor %}
+		{% else %}
+		<p class="float-left whitebox comment animate">
+			{{ memory.text }}
+			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
+		</p>
+		{% endif %}
+		
+	</div>
+
+</section>
+{% endfor %}
+
+<script>
+var rotated = false;
+var elements = document.getElementsByClassName('animate');
+
+for (var i = 0; i < elements.length; i++) {
+var x = (Math.random() * 6) - 3;
+    var element = elements[i], deg = rotated ? 0 : 66;
+    element.style.webkitTransform = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.mozTransform    = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.msTransform     = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.oTransform      = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.transform       = 'scale(0.9) rotate('+x+'deg)'; 
+}
+rotated = !rotated;
+
+</script>
+
+{% endblock %}

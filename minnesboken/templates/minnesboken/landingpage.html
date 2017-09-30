@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Till minne av Christian Lundberg{% endblock %}
+{% block content %}
+<section>
+	<article>
+		<h2>{{ random_writing.writing_title }}</h2>
+		<p class="writing">
+			{{ random_writing.writing_text }}
+		</p>
+	</article>
+	<a href="{% url 'list_of_writings' %}">Läs fler av Christians texter här ></a>
+</section>
+
+<section>
+	<h2>Dela med dig av ett Christian-minne</h2>
+	<p>Christian berörde många hjärtan och den här webbplatsen är tänkt att utgöra ett ställe där vi kan samlas och minnas honom. Du är varmt välkommen att dela med dig av ett minne, en dikt, en bild eller eller något annat med koppling till Christian i minnesboken:</p>
+	<a href="#" class="button">DELA MED DIG AV ETT CHRISTIAN-MINNE</a>
+</section>
+
+<section>
+	<p><img height="80" class="profilepic" src="{{ random_memory.userprofile.avatar_url }}"> {{ random_memory.text }}</p>
+	<a href="{% url 'memories' %}">Läs mer ur minnesboken här ></a>
+</section>
+
+<section>
+	<img src="{{ random_picture.url }}" />
+	<a href="{% url 'pictures' %}">Se fler bilder här ></a>
+</section>
+{% endblock %}

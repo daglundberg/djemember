@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+{% block content %}
+{% cloudinary picture.url %}
+<p>{{ picture.picture_text }}</p>
+<p>{{ picture.picture_location }}</p>
+<p>{{ picture.date_taken }}</p>
+{% endblock %}
