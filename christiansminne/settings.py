@@ -25,7 +25,7 @@ SECRET_KEY = '#y#$et*0^(e)x3*h7p664cp%!=mq)(b8pax*q%jc81ijl=x9+q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['christiansminne.se', '139.59.152.76', '127.0.0.1', ]
 
 SITE_ID = 1
 
