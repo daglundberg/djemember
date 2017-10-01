@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Minnesboken{% endblock %}
 {% block content %}
+{% if user.is_authenticated and user.is_activated %}
 {% if latest_memories_list %}
 
     {% for memory in latest_memories_list %}
@@ -11,5 +12,10 @@
 
 {% else %}
     <p>No user has published a memory yet.</p>
+{% endif %}
+
+{% else %}
+<h2>Välkommen att logga in för att ta del av minnesboken.</h2>
+<p>Om du på något sätt kände eller har haft en koppling till Christian är du varmt välkommen att logga in med Facebook här, eller ansöka om ett konto utan Facebook här. Notera att alla nya konton aktiveras manuellt och att det kan dröja upp till ett par dagar innan ditt konto blir aktiverat.</p>
 {% endif %}
 {% endblock %}

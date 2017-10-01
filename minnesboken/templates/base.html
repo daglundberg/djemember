@@ -34,6 +34,9 @@
 		</section>
 </header>
 <main id="temp" class="container">
+	{% if user.is_authenticated and user.is_activated is False %}
+	<div class="alert-header"><h3>Ditt konto har inte aktiverats ännu. Vi ber om överseende för dröjsmålet.</h3></div>
+	{% endif %}
 	{% block content %}
 	{% endblock %}
 </main>

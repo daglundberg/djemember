@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if user.is_authenticated and user.is_activated %}
   <p>{{ memory.text }}</p>
 
 
@@ -8,4 +9,5 @@
    <p>{{ picture.picture_text }}</p>
 {% endfor %}
 <p>Skrivet av {{ memory.userprofile }}. Publicerat {{ memory.pub_date}}</p>
+{% endif %}
 {% endblock %}

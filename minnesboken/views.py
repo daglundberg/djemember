@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse, redirect
-from .models import Memory, Picture, Writing, UserProfile, CloudinaryPhoto
+from .models import Memory, Picture, Writing, CloudinaryPhoto
 from random import randint
 from django.utils import timezone
 from .forms import MemoryForm, PictureForm, PhotoDirectForm
@@ -36,9 +36,12 @@ def direct_upload_complete(request):
 
 
 def upload_prompt(request):
-    context = dict(direct_form=PhotoDirectForm())
-    cl_init_js_callbacks(context['direct_form'], request)
-    return render(request, 'minnesboken/memories/upload_prompt.html', context)
+    if request.user.is_authenticated and request.user.is_activated:
+        context = dict(direct_form=PhotoDirectForm())
+        cl_init_js_callbacks(context['direct_form'], request)
+        return render(request, 'minnesboken/memories/upload_prompt.html', context)
+    else:
+        return render(request, 'not_activated.html')
 
 # def compose_memory(request):
 #     if request.method == "POST":
@@ -140,10 +143,8 @@ def post_memory(request):  # TODO: Have some fun here
     else:
 
         # TODO: the following should throw an exception if theres no UserProfile assigned to current user, because this could happen :/
-        current_user = request.user
-        profil = UserProfile.objects.filter(user=current_user)[0]
 
-        mymemory = Memory(userprofile=profil, memory_text=request.POST['text'], pub_date=timezone.now())
+        mymemory = Memory(userprofile=request.user, memory_text=request.POST['text'], pub_date=timezone.now())
         mymemory.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a

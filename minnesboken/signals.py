@@ -1,7 +1,6 @@
 from django.dispatch import receiver
 from allauth.account.signals import user_signed_up
 import hashlib
-from .models import UserProfile
 
 
 @receiver(user_signed_up)
@@ -43,6 +42,5 @@ def social_login_fname_lname_profilepic(sociallogin, user, **kwargs):
             # verified = sociallogin.account.extra_data['verified_email']
             picture_url = sociallogin.account.extra_data['picture']
 
+    user.avatar_url = picture_url
     user.save()
-    profile = UserProfile(user=user, avatar_url=picture_url)
-    profile.save()

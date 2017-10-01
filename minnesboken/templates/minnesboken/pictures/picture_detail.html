@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load cloudinary %}
 {% block content %}
+{% if user.is_authenticated and user.is_activated %}
 {% cloudinary picture.url %}
 <p>{{ picture.picture_text }}</p>
 <p>{{ picture.picture_location }}</p>
 <p>{{ picture.date_taken }}</p>
+{% endif %}
 {% endblock %}

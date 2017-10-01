@@ -6,12 +6,13 @@
 <img class="center" src="/static/christianbaby.png">
 <div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
 
+{% if user.is_authenticated and user.is_activated %}
+
 {% for memory in timeline_memories_list %}
 
 {% ifchanged memory.timeline_date.year %}
 <div><h3 class="year">{{ memory.timeline_date.year }}</h3></div>
 {% endifchanged %}
-
 
 <section  class="timelinerow">
 	<div class="lefty">
@@ -70,5 +71,9 @@ var x = (Math.random() * 6) - 3;
 rotated = !rotated;
 
 </script>
+{% else %}
+<h2>Välkommen att logga in för att ta del av minneslinjen.</h2>
+<p>Om du på något sätt kände eller har haft en koppling till Christian är du varmt välkommen att logga in med Facebook här, eller ansöka om ett konto utan Facebook här. Notera att alla nya konton aktiveras manuellt och att det kan dröja upp till ett par dagar innan ditt konto blir aktiverat.</p>
+{% endif %}
 
 {% endblock %}

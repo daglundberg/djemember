@@ -26,7 +26,11 @@ SECRET_KEY = '#y#$et*0^(e)x3*h7p664cp%!=mq)(b8pax*q%jc81ijl=x9+q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['christiansminne.se', '165.227.161.83', '127.0.0.1', ]
+ALLOWED_HOSTS = ['christiansminne.se', '165.227.161.83', 'localhost', ]
+
+AUTH_USER_MODEL = 'core.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SITE_ID = 1
 
@@ -37,6 +41,7 @@ LOGIN_REDIRECT_URL = 'landingpage'
 INSTALLED_APPS = [
     # My apps:
     'minnesboken.apps.MinnesbokenConfig',
+    'core.apps.CoreConfig',
     # Django apps:
     'django.contrib.admin',
     'django.contrib.auth',
