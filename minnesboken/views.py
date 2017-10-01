@@ -70,20 +70,24 @@ def upload_prompt(request):
 
 
 def landingpage(request):
-    if Writing.objects.count() > 0:
-        random_writing = Writing.objects.all()[randint(0, Writing.objects.count() - 1)]
-    else:
-        random_writing = "No writings."
+    public_writings = Writing.objects.filter(is_featured_publicly=True)
+    public_pictures = Picture.objects.filter(is_featured_publicly=True)
+    public_memories = Memory.objects.filter(is_featured_publicly=True)
 
-    if Picture.objects.count() > 0:
-        random_picture = Picture.objects.all()[randint(0, Picture.objects.count() - 1)]
+    if public_writings.count() > 0:
+        random_writing = public_writings[randint(0, public_writings.count() - 1)]
     else:
-        random_picture = "No pictures."
+        random_writing = "No public writings."
 
-    if Memory.objects.count() > 0:
-        random_memory = Memory.objects.all()[randint(0, Memory.objects.count() - 1)]
+    if public_pictures.count() > 0:
+        random_picture = public_pictures[randint(0, Picture.objects.count() - 1)]
     else:
-        random_memory = "No memories."
+        random_picture = "No public pictures."
+
+    if public_memories.count() > 0:
+        random_memory = public_memories[randint(0, Memory.objects.count() - 1)]
+    else:
+        random_memory = "No public memories."
 
     return render(request, 'minnesboken/landingpage.html', {
                            'random_picture': random_picture,
