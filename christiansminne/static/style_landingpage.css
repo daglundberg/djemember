@@ -118,6 +118,11 @@ footer
     margin-right: 14px;
 }
 
+.memorytxt
+{
+     text-align: left;
+}
+
 .userbar
 {
     float:right;
