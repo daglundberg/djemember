@@ -9,30 +9,6 @@
 	<title>{% block title %}{% endblock %}</title>
 </head> 
 <body>
-<header class="wrapper">
-	<nav class="navigation navigation-item">
-		<section class="container">
-		<a class="float-left" href="{% url 'landingpage' %}">Till minne av Christian Lundberg</a>
-		<ul class="navigation-list float-right">
-		<li class="navigation-item"><a href="{% url 'timeline' %}">Minneslinje</a></li>
-		<li class="navigation-item"><a href="{% url 'memories' %}">Minnesbok</a></li>
-		<li class="navigation-item"><a href="{% url 'share_a_memory' %}">Dela med dig av ett minne</a></li>
-		<li class="navigation-item"><a href="{% url 'list_of_writings' %}">Christians texter</a></li>
-		<li class="navigation-item"><a href="{% url 'pictures' %}">Bilder</a></li>
-		{% if user.is_authenticated %}
-		<li class="navigation-item"><p>Hej {{ user.username }}!</p></li>
-		<img src="{{ userprofiles }}">
-		<li class="navigation-item"><a href="{% url 'logout' %}">Logga ut ></a></li>
-		{% else %}
-		<li class="navigation-item"><a style="margin-top: -5px;" class="button button-outline" href="{% url 'login' %}">Logga in ></a></li>
-		{% endif %}
-		</ul>
-		</section>
-	</nav><section class="logo">
-		<a href="{% url 'landingpage' %}">Till minne av</a><br/>
-		<a href="{% url 'landingpage' %}"><h1>Christian<br/>Lundberg</h1></a>
-		</section>
-</header>
 <main id="temp" class="container">
 			{% if user.is_authenticated and user.is_activated is False %}
 	<div class="alert-header"><h3>Ditt konto har inte aktiverats ännu. Vi ber om överseende för dröjsmålet.</h3></div>
