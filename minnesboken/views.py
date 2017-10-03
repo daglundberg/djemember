@@ -44,34 +44,6 @@ def share_a_memory(request):
     else:
         return render(request, 'templates/not_activated.html')
 
-# def compose_memory(request):
-#     if request.method == "POST":
-#         context = dict(backend_form=PhotoDirectForm())
-#         cloudinaryPhotoForm = PhotoForm(request.POST, request.FILES)
-#         context['posted'] = cloudinaryPhotoForm.instance
-#         if cloudinaryPhotoForm.is_valid():
-#             cloudinaryPhotoForm.save()
-#         memoryForm = MemoryForm(request.POST)
-#         pictureForm = PictureForm(request.POST)
-#         if memoryForm.is_valid():
-#             if pictureForm.is_valid():
-#                 memory = memoryForm.save(commit=False)
-#                 memory.userprofile = UserProfile.objects.filter(user=request.user)[0]
-#                 memory.pub_date = datetime.datetime.now()
-#                 memory.save()
-
-#                 picture = pictureForm.save(commit=False)
-#                 picture.memory = memory
-#                 picture.save()
-
-#                 return redirect('memory_detail', memory_id=memory.pk)
-#     else:
-#         memoryForm = MemoryForm()
-#         pictureForm = PictureForm()
-#         cloudinaryPhotoForm = PhotoForm()
-#     return render(request, 'minnesboken/memories/compose_memory.html',
-# {'memoryForm': memoryForm, 'pictureForm': pictureForm, 'cloudinaryPhotoForm': cloudinaryPhotoForm})
-
 
 def landingpage(request):
     public_writings = Writing.objects.filter(is_featured_publicly=True)
@@ -84,10 +56,12 @@ def landingpage(request):
         random_writing = "No public writings."
 
     if public_pictures.count() > 0:
-        random_picture = public_pictures[randint(0, Picture.objects.count() - 1)]
+        random_picture = public_pictures[randint(0, public_pictures.count() - 1)]
+    else:
+        random_picture = "No public pictures."
 
     if public_memories.count() > 0:
-        random_memory = public_memories[randint(0, Memory.objects.count() - 1)]
+        random_memory = public_memories[randint(0, public_memories.count() - 1)]
     else:
         random_memory = "No public memories."
 
@@ -140,8 +114,6 @@ def post_memory(request):  # TODO: Have some fun here
     if request.user.is_authenticated() is False:
         return HttpResponseForbidden()
     else:
-
-        # TODO: the following should throw an exception if theres no UserProfile assigned to current user, because this could happen :/
 
         mymemory = Memory(userprofile=request.user, memory_text=request.POST['text'], pub_date=timezone.now())
         mymemory.save()
