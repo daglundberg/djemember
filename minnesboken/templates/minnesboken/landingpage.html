@@ -18,7 +18,7 @@
 </section>
 
 <section id="bilder" class="paralax-image3">
-	{% cloudinary random_picture.url width=500 height=380 %} <br>
+	{% cloudinary random_picture.url height=400 scale="fill" %} <br>
 	<a class="more_link" href="{% url 'pictures' %}">Se fler bilder här ></a>
 </section>
 {% endblock %}
