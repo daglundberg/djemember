@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Caveat+Brush|Patrick+Hand|Special+Elite');
 
+ *,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
 p {
   text-align: justify;
   text-justify: inter-word;
@@ -28,6 +38,15 @@ html {
   margin:; 0px;
 }
 
+.smallprofile
+{
+    position: absolute;
+    top: -30px;
+    border-style: solid;
+    border-color: white;
+    border-width: 4px;
+}
+
 .white
 {
   color:white;
@@ -51,7 +70,7 @@ html {
   display: flex;
   border-left-style: solid;
   border-left-width: 5px;
-  left: 5px;
+  left: -5px;
   position: relative;
   border-left-color: white;
   display: flex;
@@ -66,13 +85,14 @@ div.lefty * {
   text-align: center;
   font-family: "Reenie Beanie";
   font-size: 16pt;
+  margin-top: 3px;
 }
 
 .year {
   text-align: center;
   font-family: "Raleway";
   color: white;
-  width: 90px;
+  width: 140px;
   padding: 8px;
   margin-left: auto;
   margin-right: auto;
@@ -226,5 +246,9 @@ span{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+img[src*="None"] {
+    display: none;
 }
 

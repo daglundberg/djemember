@@ -21,7 +21,7 @@
 		{% if forloop.counter|divisibleby:2 %}
 
 		<p class="float-right whitebox comment animate">
-					<img height="40" class="float-left" src="{{ memory.userprofile.avatar_url }}">
+					<img height="40" class="float-left smallprofile" src="{{ memory.userprofile.avatar_url }}">
 			{{ memory.text }}
 			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
 		</p>
@@ -49,7 +49,7 @@
 		{% endfor %}
 		{% else %}
 		<p class="float-left whitebox comment animate">
-		<img height="40" class="float-right" src="{{ memory.userprofile.avatar_url }}">
+		<img height="40" class="float-right smallprofile" src="{{ memory.userprofile.avatar_url }}">
 			{{ memory.text }}
 			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
 		</p>
