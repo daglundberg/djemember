@@ -157,6 +157,11 @@ span{
   z-index: 30
 }
 
+.container
+{
+  padding: 0 !important;
+}
+
 .navigation .container {
   padding-bottom: 0;
   padding-top: 0;

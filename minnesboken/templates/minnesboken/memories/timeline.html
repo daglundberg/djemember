@@ -7,10 +7,12 @@
 <div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
 
 {% if user.is_authenticated and user.is_activated %}
-
+<section>
 {% for memory in timeline_memories_list %}
 
 {% ifchanged memory.timeline_date.year %}
+</section>
+<section class="full-year" id="year{{ memory.timeline_date.year }}">
 <div><h3 class="year">{{ memory.timeline_date.year }}</h3></div>
 {% endifchanged %}
 
