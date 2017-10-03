@@ -35,7 +35,7 @@ def direct_upload_complete(request):
     return HttpResponse(json.dumps(ret), content_type='application/json')
 
 
-def upload_prompt(request):
+def share_a_memory(request):
     if request.user.is_authenticated and request.user.is_activated:
         context = dict(direct_form=PhotoDirectForm())
         cl_init_js_callbacks(context['direct_form'], request)

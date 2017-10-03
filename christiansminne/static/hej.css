@@ -7,6 +7,11 @@
     margin: auto;
 }
 
+section
+{
+    text-align: center;
+}
+
 /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
@@ -160,7 +165,6 @@ footer
 
 .paralax-image2
 {
-    text-align: center;
     background-color: #B4B4B4;
         background-image: url('cl-face.jpg');
         background-attachment: fixed;
@@ -168,4 +172,8 @@ footer
         background-repeat: no-repeat;
         background-size: cover;
         background-blend-mode: overlay;
+        padding-top: 200px;
+    padding-bottom: 200;
+    padding-left: 7%;
+    padding-right: 7%;
 }

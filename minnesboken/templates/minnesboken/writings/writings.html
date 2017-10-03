@@ -11,7 +11,7 @@ fick läsas.</p>
 {% if writings_list %}
     <ul>
     {% for writing in writings_list %}
-        <li><a href="{% url 'writing_detail' writing.pk %}">{{ writing.writing_title }}</a></li>
+        <li><a href="{% url 'writing_detail' writing.pk %}">{{ writing.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
