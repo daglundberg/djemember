@@ -129,8 +129,8 @@ div.lefty * {
   padding: 11px;
   width: 280px;
   font-family: "Baskerville";
-  font-size: 12pt;
-  line-height: 12pt;
+    font-size: 16pt;
+    line-height: 17pt;
   color: #232323;
 }
 
@@ -231,6 +231,12 @@ span{
 
 .navigation .navigation-link.active {
   color: #606c76
+}
+
+#year1989, #year1990, #year1991, #year1992,
+#year1993, #year1994, #year1995, #year1996,
+#year1997, #year1998, #year1999, #year2000, #year2001 {
+  background-image: url('timeline/skillebylund.jpg');
 }
 
 
