@@ -12,6 +12,7 @@ import cloudinary.api
 from django import forms
 
 from cloudinary.forms import cl_init_js_callbacks
+from cloudinary import CloudinaryImage
 from django.views.decorators.csrf import csrf_exempt
 import json
 
@@ -84,8 +85,6 @@ def landingpage(request):
 
     if public_pictures.count() > 0:
         random_picture = public_pictures[randint(0, Picture.objects.count() - 1)]
-    else:
-        random_picture = "No public pictures."
 
     if public_memories.count() > 0:
         random_memory = public_memories[randint(0, Memory.objects.count() - 1)]

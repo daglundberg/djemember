@@ -1,28 +1,24 @@
 {% extends 'base_landingpage.html' %}
+{% load cloudinary %}
 {% block title %}Till minne av Christian Lundberg{% endblock %}
 {% block content %}
-<section>
-	<article>
-		<p class="writing">
-			{{ random_writing.text }}
-		</p>
-	</article>
-	<a href="{% url 'list_of_writings' %}">Läs fler av Christians texter här ></a>
+<section id="texter">
+	<p class="writing">{{ random_writing.text }}</p>
+	<a class="more_link" href="{% url 'list_of_writings' %}">Läs fler av Christians texter här ></a>
 </section>
 
-<section class="paralax-image2">
-	<h2>Dela med dig av ett Christian-minne</h2>
+<section id="dela" class="paralax-image2">
+	<a href="{% url 'share_a_memory' %}" class="more_link button"><span>DELA MED DIG AV ETT CHRISTIAN-MINNE</span></a>
 	<p>Christian berörde många hjärtan och den här webbplatsen är tänkt att utgöra ett ställe där vi kan samlas och minnas honom. Du är varmt välkommen att dela med dig av ett minne, en dikt, en bild eller eller något annat med koppling till Christian i minnesboken:</p><br>
-	<a href="{% url 'share_a_memory' %}" class="button">DELA MED DIG AV ETT CHRISTIAN-MINNE</a>
 </section>
 
-<section>
-	<p><img height="80" class="profilepic" src="{{ random_memory.userprofile.avatar_url }}"> {{ random_memory.text }}</p>
-	<a href="{% url 'memories' %}">Läs mer ur minnesboken här ></a>
+<section id="minnesboken">
+	<p><img height="80" class="profilepic" src="{{ random_memory.userprofile.avatar_url }}"> {{ random_memory.text }}</p><br>
+	<a class="more_link" href="{% url 'memories' %}">Läs mer ur minnesboken här ></a>
 </section>
 
-<section>
-	<img src="{{ random_picture.url }}" />
-	<a href="{% url 'pictures' %}">Se fler bilder här ></a>
+<section id="bilder" class="paralax-image3">
+	{% cloudinary random_picture.url width=500 height=380 %} <br>
+	<a class="more_link" href="{% url 'pictures' %}">Se fler bilder här ></a>
 </section>
 {% endblock %}
