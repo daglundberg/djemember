@@ -25,6 +25,7 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  margin:; 0px;
 }
 
 .white
@@ -50,7 +51,7 @@ html {
   display: flex;
   border-left-style: solid;
   border-left-width: 5px;
-  left: -5px;
+  left: 5px;
   position: relative;
   border-left-color: black;
   display: flex;
@@ -76,6 +77,7 @@ div.lefty * {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;
+  font-size: 30pt;
 }
 
 
@@ -113,13 +115,12 @@ div.lefty * {
 
 .presentation {
   text-align: center;
-  background-color: white;
   padding-left: 30px;
   padding-right: 20px;
   font-family: "Raleway";
   font-size: 20pt;
   line-height: 18pt;
-  color: black;
+  color: white;
   width: 630px;
   margin-left: auto;
   margin-right: auto;
@@ -160,6 +161,8 @@ span{
 .container
 {
   padding: 0 !important;
+  margin: 0px
+  width100%;
 }
 
 .navigation .container {
@@ -207,5 +210,20 @@ span{
 
 .navigation .navigation-link.active {
   color: #606c76
+}
+
+
+#year2002, #year2003, #year2004, #year2005,
+#year2006, #year2007, #year2008, #year2009,
+#year2010, #year2011, #year2012, #year2013 {
+  background-image: url('timeline/bergen.jpg');
+}
+
+.full-year
+{
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
