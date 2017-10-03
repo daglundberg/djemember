@@ -41,7 +41,7 @@ def share_a_memory(request):
         cl_init_js_callbacks(context['direct_form'], request)
         return render(request, 'minnesboken/memories/upload_prompt.html', context)
     else:
-        return render(request, 'not_activated.html')
+        return render(request, '/templates/not_activated.html')
 
 # def compose_memory(request):
 #     if request.method == "POST":
