@@ -31,7 +31,7 @@
                 </div>
                 <div style="color:white" class="userbar">
                     {% if user.is_authenticated %}
-                        Hi {{ user.username }}! <a style="color:white" href="{% url 'logout' %}">Logga ut ></a>
+                        Hej {{ user.username }}! <a style="color:white" href="{% url 'logout' %}">Logga ut ></a>
   		                    {% else %}
                             <a style="color:white" href="{% url 'login' %}">Logga in ></a>
   		                        {% endif %}

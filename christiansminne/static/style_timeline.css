@@ -39,7 +39,7 @@ html {
   float: left;
   border-right-style: solid;
   border-right-width: 5px;
-  border-right-color: black;
+  border-right-color: white;
   height: 100%;
   margin-left: auto;
   display: flex;
@@ -53,7 +53,7 @@ html {
   border-left-width: 5px;
   left: 5px;
   position: relative;
-  border-left-color: black;
+  border-left-color: white;
   display: flex;
 }
  
@@ -71,13 +71,14 @@ div.lefty * {
 .year {
   text-align: center;
   font-family: "Raleway";
-  color: black;
+  color: white;
   width: 90px;
   padding: 8px;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0px;
   font-size: 30pt;
+  margin-top: 0px;
 }
 
 
