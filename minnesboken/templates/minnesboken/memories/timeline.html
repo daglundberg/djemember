@@ -3,10 +3,11 @@
 {% block title %}Minnesboken{% endblock %}
 {% block content %}
 
-<img class="center" src="/static/timeline/christianbaby.png">
+<img class="center startpic" src="/static/timeline/christianbaby.png">
 <div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
 
 {% if user.is_authenticated and user.is_activated %}
+<a class="btn_add" href="{% url 'share_a_memory' %}"><span>+</span></a>
 <section>
 {% for memory in timeline_memories_list %}
 

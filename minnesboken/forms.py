@@ -6,10 +6,13 @@ from .models import Picture, Memory, CloudinaryPhoto
 
 
 class MemoryForm(forms.ModelForm):
-
     class Meta:
         model = Memory
-        fields = ('text',)
+        fields = ('text', 'is_on_timeline', 'timeline_date')
+
+        def __init__(self, *args, **kwargs):
+            super(MemoryForm, self).__init__(*args, **kwargs)
+            self.fields['timeline_date'].required = False
 
 
 class PictureForm(forms.ModelForm):

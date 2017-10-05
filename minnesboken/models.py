@@ -2,9 +2,9 @@ from __future__ import unicode_literals
 from django.db import models
 from core.models import User
 from cloudinary.models import CloudinaryField
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
 
 try:
     from django.utils.encoding import force_text
