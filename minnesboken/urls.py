@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^dtempdtemp/$', views.direct_upload_complete, name='direct_upload_complete'),
-    url(r'^dela-ett-minne/$', views.share_a_memory, name='share_a_memory'),
+    url(r'^dela-nytt-minne/$', views.new_timeline_post, name='new_timeline_post'),
     url(r'^$', views.memories, name='memories'),
     url(r'^(?P<memory_id>[0-9]+)/$', views.memory_detail, name='memory_detail'),
     url(r'^bilder/$', views.pictures, name='pictures'),

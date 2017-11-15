@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, reverse, redirect
 from .models import Memory, Picture, Writing    # CloudinaryPhoto
 from random import randint
 from django.utils import timezone
-from .forms import MemoryForm, PhotoDirectForm     # PictureForm,
+from .forms import MemoryTimelineForm, PhotoDirectForm     # PictureForm,
 # import datetime
 import os
 import cloudinary
@@ -45,21 +45,21 @@ def share_a_memory2(request):
         return render(request, 'templates/not_activated.html')
 
 
-def share_a_memory(request):
+def new_timeline_post(request):
     if request.user.is_authenticated and request.user.is_activated:
         if request.method == "POST":
-            form = MemoryForm(request.POST)
+            form = MemoryTimelineForm(request.POST)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.userprofile = request.user
                 post.pub_date = timezone.now()
                 post.text = request.text
-                post.is_on_timeline = request.is_on_timeline
+                post.is_on_timeline = True
                 post.timeline_date = request.timeline_date
                 post.save()
                 return redirect('post_detail', pk=post.pk)
         else:
-            form = MemoryForm()
+            form = MemoryTimelineForm()
         return render(request, 'minnesboken/memories/memory_edit.html', {'form': form})
 
 

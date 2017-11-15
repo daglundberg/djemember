@@ -5,14 +5,10 @@ from cloudinary.forms import CloudinaryJsFileField
 from .models import Picture, Memory, CloudinaryPhoto
 
 
-class MemoryForm(forms.ModelForm):
+class MemoryTimelineForm(forms.ModelForm):
     class Meta:
         model = Memory
-        fields = ('text', 'is_on_timeline', 'timeline_date')
-
-        def __init__(self, *args, **kwargs):
-            super(MemoryForm, self).__init__(*args, **kwargs)
-            self.fields['timeline_date'].required = False
+        fields = ('text', 'timeline_date')
 
 
 class PictureForm(forms.ModelForm):

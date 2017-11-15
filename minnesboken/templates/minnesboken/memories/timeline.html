@@ -7,7 +7,7 @@
 <div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
 
 {% if user.is_authenticated and user.is_activated %}
-<a class="btn_add" href="{% url 'share_a_memory' %}"><span>+</span></a>
+<a class="btn_add" href="{% url 'new_timeline_post' %}"><span>+</span></a>
 <section>
 {% for memory in timeline_memories_list %}
 
