@@ -9,6 +9,15 @@ class MemoryTimelineForm(forms.ModelForm):
     class Meta:
         model = Memory
         fields = ('text', 'timeline_date')
+        labels = {
+            "text": "Minnestext",
+            "timeline_date": "Tidpunkt för minnet"}
+
+
+class MemoryForm(forms.ModelForm):
+    class Meta:
+        model = Memory
+        fields = ('text', )
 
 
 class PictureForm(forms.ModelForm):

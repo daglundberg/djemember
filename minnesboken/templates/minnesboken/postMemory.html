@@ -1,9 +1,0 @@
-<h1>Dela ett minne</h1>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'minnesboken:postMemory %}" method="post">
-{% csrf_token %}
-    <input type="text" name="minne" id="minne" value="Text goes here" /><br />
-<input type="submit" value="Dela" />
-</form>

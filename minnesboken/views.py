@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, reverse, redirect
 from .models import Memory, Picture, Writing    # CloudinaryPhoto
 from random import randint
 from django.utils import timezone
-from .forms import MemoryTimelineForm, PhotoDirectForm     # PictureForm,
+from .forms import MemoryForm, MemoryTimelineForm    # PictureForm,
 # import datetime
 import os
 import cloudinary
@@ -11,38 +11,12 @@ import cloudinary.uploader
 import cloudinary.api
 # from django import forms
 
-from cloudinary.forms import cl_init_js_callbacks
-# from cloudinary import CloudinaryImage
-from django.views.decorators.csrf import csrf_exempt
-import json
-
 
 cloudinary.config(
     cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME', ''),
     api_key=os.environ.get('CLOUDINARY_API_KEY', ''),
     api_secret=os.environ.get('CLOUDINARY_API_SECRET', '')
 )
-
-
-@csrf_exempt
-def direct_upload_complete(request):
-    form = PhotoDirectForm(request.POST)
-    if form.is_valid():
-        form.save()
-        ret = dict(photo_id=form.instance.id)
-    else:
-        ret = dict(errors=form.errors)
-
-    return HttpResponse(json.dumps(ret), content_type='application/json')
-
-
-def share_a_memory2(request):
-    if request.user.is_authenticated and request.user.is_activated:
-        context = dict(direct_form=PhotoDirectForm())
-        cl_init_js_callbacks(context['direct_form'], request)
-        return render(request, 'minnesboken/memories/upload_prompt.html', context)
-    else:
-        return render(request, 'templates/not_activated.html')
 
 
 def new_timeline_post(request):
@@ -60,6 +34,23 @@ def new_timeline_post(request):
                 return redirect('post_detail', pk=post.pk)
         else:
             form = MemoryTimelineForm()
+        return render(request, 'minnesboken/memories/memory_edit.html', {'form': form})
+
+
+def new_post(request):
+    if request.user.is_authenticated and request.user.is_activated:
+        if request.method == "POST":
+            form = MemoryForm(request.POST)
+            if form.is_valid():
+                post = form.save(commit=False)
+                post.userprofile = request.user
+                post.pub_date = timezone.now()
+                post.text = request.text
+                post.is_on_timeline = True
+                post.save()
+                return redirect('post_detail', pk=post.pk)
+        else:
+            form = MemoryForm()
         return render(request, 'minnesboken/memories/memory_edit.html', {'form': form})
 
 
