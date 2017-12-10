@@ -1,0 +1,8 @@
+# Install with: 'pip install -r requirements.txt'
+
+django
+mysqlclient
+whitenoise
+cloudinary
+django-allauth
+
