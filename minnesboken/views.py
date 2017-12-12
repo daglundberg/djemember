@@ -19,6 +19,11 @@ cloudinary.config(
 )
 
 
+def memory_detail(request, memory_id):
+    memory = get_object_or_404(Memory, pk=memory_id)
+    return render(request, 'minnesboken/memories/memory_detail.html', {'memory': memory})
+
+
 def new_timeline_post(request):
     if request.user.is_authenticated and request.user.is_activated:
         if request.method == "POST":
@@ -27,11 +32,13 @@ def new_timeline_post(request):
                 post = form.save(commit=False)
                 post.userprofile = request.user
                 post.pub_date = timezone.now()
-                post.text = request.text
+                # the model form already has the text value. No need to set it explicitly
+                # post.text = form.get('text')
                 post.is_on_timeline = True
-                post.timeline_date = request.timeline_date
+                # the model form already has the timeline_date. No need to set it explicitly
+                # post.timeline_date = request.timeline_date
                 post.save()
-                return redirect('post_detail', pk=post.pk)
+                return redirect('memory_detail', memory_id=post.pk)
         else:
             form = MemoryTimelineForm()
         return render(request, 'minnesboken/memories/memory_edit.html', {'form': form})
@@ -48,7 +55,7 @@ def new_post(request):
                 post.text = request.text
                 post.is_on_timeline = True
                 post.save()
-                return redirect('post_detail', pk=post.pk)
+                return redirect('memory_detail', pk=post.pk)
         else:
             form = MemoryForm()
         return render(request, 'minnesboken/memories/memory_edit.html', {'form': form})
@@ -92,10 +99,6 @@ def memories(request):
     context = {'latest_memories_list': latest_memories_list}
     return render(request, 'minnesboken/memories/memories.html', context)
 
-
-def memory_detail(request, memory_id):
-    memory = get_object_or_404(Memory, pk=memory_id)
-    return render(request, 'minnesboken/memories/memory_detail.html', {'memory': memory})
 
 
 def pictures(request):
