@@ -18,14 +18,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mp1z*_bah8!x+@_leb52&9)h(*ag6bouyp-i@*d9&02#4dn*-i'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ]
-
 AUTH_USER_MODEL = 'core.User'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -77,10 +69,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djemember.wsgi.application'
 
+# Some settings we want to store as environment variables:
 
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
+DEBUG = os.environ.get('DEBUG', '')
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', os.environ.get('ALLOWED_IP', ''), ]
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('DATABASE_ENGINE', ''),
