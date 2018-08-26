@@ -1,0 +1,4 @@
+# Install with: 'pip install -r requirements.txt'
+
+django
+django-allauth

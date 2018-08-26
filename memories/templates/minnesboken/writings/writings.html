@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Christians texter{% endblock %}
+{% block content %}
+<p>Christian var alltid väldigt fysisk aktiv och älskade all världens sport men när cancern gjorde det svårt att
+förtsätta växte det bland annat fram ett djup intresse för filosofi och politik men inte minst också ett geniunt
+intresse för att skriva. Han lät sig inte blygas av nervösa koder på sociala medier utan skrev ofta politiskt, intimt
+och djupt på facebook och bloggar.
+<br/><br/>
+Här är några texter som vi hittat på hans dator som berört oss så mycket att det skulle kännas fel om de inte
+fick läsas.</p>
+{% if writings_list %}
+    <ul>
+    {% for writing in writings_list %}
+        <li><a href="{% url 'writing_detail' writing.pk %}">{{ writing.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No writings.</p>
+{% endif %}
+{% endblock %}

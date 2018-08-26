@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/bulma.min.css">
+  </head>
+<body>
+
+<nav class="navbar is-transparent">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{% url 'landingpage' %}">
+      <img src="/static/logo.png" alt="logo" width="112" height="28">
+    </a>
+    <div class="navbar-burger burger" data-target="navbarTransp">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarTransp" class="navbar-menu">
+    <div class="navbar-start">
+       <a class="navbar-item" href="{% url 'landingpage' %}">
+        Start
+      </a>
+       <a class="navbar-item" href="{% url 'timeline' %}">
+        Timeline
+      </a>
+       <a class="navbar-item" href="{% url 'memories' %}">
+        Memories
+       </a>
+        <a class="navbar-item" href="{% url 'pictures' %}">
+        Pictures
+       </a>
+        <a class="navbar-item" href="{% url 'list_of_writings' %}">
+        Texts
+       </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+
+          <p class="control">
+            <a class="bd-tw-button button" href="">
+              <span class="icon">
+                <i class="fa fa-user-circle"></i>
+              </span>
+              <span>
+                Account
+              </span>
+            </a>
+          </p>
+
+          <p class="control">
+            <a class="button is-primary" href="{% url 'new_timeline_post' %}">
+              <span class="icon">
+                <i class="fa fa-plus"></i>
+              </span>
+              <span>Share a memory</span>
+            </a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+  	{% block content %}
+{% endblock %}
+
+  </body>
+</html>
+
+
+

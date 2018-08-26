@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Minnesboken{% endblock %}
+{% block content %}
+
+<img class="center startpic" src="/static/timeline/christianbaby.png">
+<div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
+
+<section>
+{% for memory in timeline_memories_list %}
+
+{% ifchanged memory.timeline_date.year %}
+</section>
+<section class="full-year" id="year{{ memory.timeline_date.year }}">
+<div><h3 class="year">{{ memory.timeline_date.year }}</h3></div>
+{% endifchanged %}
+
+<section  class="timelinerow">
+	<div class="lefty">
+		{% if forloop.counter|divisibleby:2 %}
+
+		<p class="float-right whitebox comment animate">
+					<img height="40" class="float-left smallprofile" src="{{ memory.userprofile.avatar_url }}">
+			{{ memory.text }}
+			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
+		</p>
+		{% else %}
+		{% for picture in memory.picture_set.all %}	
+		<div class="thumb whitebox float-right animate">
+			<img alt="some picture" />
+			<p class="picture_text">
+				{{ picture.picture_text }}
+			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
+		</div>
+		{% endfor %}
+		{% endif %}
+
+	</div>
+	<div class="righty">
+		{% if forloop.counter|divisibleby:2 %}
+		{% for picture in memory.picture_set.all %}	
+		<div class="thumb whitebox animate">
+			<img alt="some picture" />
+			<p class="picture_text">
+				{{ picture.picture_text }}
+			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
+		</div>
+		{% endfor %}
+		{% else %}
+		<p class="float-left whitebox comment animate">
+		<img height="40" class="float-right smallprofile" src="{{ memory.userprofile.avatar_url }}">
+			{{ memory.text }}
+			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
+		</p>
+		{% endif %}
+		
+	</div>
+
+</section>
+{% endfor %}
+
+{% endblock %}

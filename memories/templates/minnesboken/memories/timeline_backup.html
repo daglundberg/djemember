@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+{% block title %}Minnesboken{% endblock %}
+{% block content %}
+
+<img class="center startpic" src="/static/timeline/christianbaby.png">
+<div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
+
+{% if user.is_authenticated and user.is_activated %}
+<a class="btn_add" href="{% url 'new_timeline_post' %}"><span>+</span></a>
+<section>
+{% for memory in timeline_memories_list %}
+
+{% ifchanged memory.timeline_date.year %}
+</section>
+<section class="full-year" id="year{{ memory.timeline_date.year }}">
+<div><h3 class="year">{{ memory.timeline_date.year }}</h3></div>
+{% endifchanged %}
+
+<section  class="timelinerow">
+	<div class="lefty">
+		{% if forloop.counter|divisibleby:2 %}
+
+		<p class="float-right whitebox comment animate">
+					<img height="40" class="float-left smallprofile" src="{{ memory.userprofile.avatar_url }}">
+			{{ memory.text }}
+			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
+		</p>
+		{% else %}
+		{% for picture in memory.picture_set.all %}	
+		<div class="thumb whitebox float-right animate">
+			{% cloudinary picture.url gravity="face" width=196 height=196 crop="fill" %}
+			<p class="picture_text">
+				{{ picture.picture_text }}
+			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
+		</div>
+		{% endfor %}
+		{% endif %}
+
+	</div>
+	<div class="righty">
+		{% if forloop.counter|divisibleby:2 %}
+		{% for picture in memory.picture_set.all %}	
+		<div class="thumb whitebox animate">
+			{% cloudinary picture.url gravity="face" width=196 height=196 crop="fill" %}
+			<p class="picture_text">
+				{{ picture.picture_text }}
+			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
+		</div>
+		{% endfor %}
+		{% else %}
+		<p class="float-left whitebox comment animate">
+		<img height="40" class="float-right smallprofile" src="{{ memory.userprofile.avatar_url }}">
+			{{ memory.text }}
+			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
+		</p>
+		{% endif %}
+		
+	</div>
+
+</section>
+{% endfor %}
+
+<script>
+var rotated = false;
+var elements = document.getElementsByClassName('animate');
+
+for (var i = 0; i < elements.length; i++) {
+var x = (Math.random() * 6) - 3;
+    var element = elements[i], deg = rotated ? 0 : 66;
+    element.style.webkitTransform = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.mozTransform    = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.msTransform     = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.oTransform      = 'scale(0.9) rotate('+x+'deg)'; 
+    element.style.transform       = 'scale(0.9) rotate('+x+'deg)'; 
+}
+rotated = !rotated;
+
+</script>
+{% else %}
+<section class="white">
+<h2>Välkommen att logga in för att ta del av minneslinjen.</h2>
+<p>Om du på något sätt kände eller har haft en koppling till Christian är du varmt välkommen att logga in med Facebook här, eller ansöka om ett konto utan Facebook här. Notera att alla nya konton aktiveras manuellt och att det kan dröja upp till ett par dagar innan ditt konto blir aktiverat.</p>
+</section>
+{% endif %}
+
+{% endblock %}

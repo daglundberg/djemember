@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% if user.is_authenticated and user.is_activated %}
+{% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<h1>Dela ett minne</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ memoryForm.as_p }}
+        {{ pictureForm.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% else %}
+<h2>Välkommen!</h2>
+<p>Om du på något sätt kände eller har haft en koppling till Christian är du varmt välkommen att logga in med Facebook här, eller ansöka om ett konto utan Facebook här. Notera att alla nya konton aktiveras manuellt och att det kan dröja upp till ett par dagar innan ditt konto blir aktiverat.</p>
+{% endif %}
+{% endblock %}
