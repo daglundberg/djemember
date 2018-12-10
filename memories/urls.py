@@ -1,20 +1,19 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
     # Create memories
-    url(r'^post-timeline-memory/$', views.new_timeline_post, name='new_timeline_post'),
-    url(r'^post-memory/$', views.new_post, name='new_post'),
+    path('create-post/', views.create_post, name='create_post'),
 
     # View memories
-    url(r'^$', views.memories, name='memories'),
-    url(r'^(?P<memory_id>[0-9]+)/$', views.memory_detail, name='memory_detail'),
+    path('', views.memories, name='memories'),
+    path('/<int:memory_id>/', views.memory_detail, name='memory_detail'),
 
     # View pictures
-    url(r'^bilder/$', views.pictures, name='pictures'),
-    url(r'^bilder/(?P<picture_id>[0-9]+)/$', views.picture_detail, name='picture_detail'),
+    path('pictures/', views.pictures, name='pictures'),
+    path('pictures/<int:picture_id>/', views.picture_detail, name='picture_detail'),
 
     # Timeline
-    url(r'^minneslinje/$', views.timeline, name='timeline')
+    path('timeline/', views.timeline, name='timeline')
 ]

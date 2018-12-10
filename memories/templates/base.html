@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   </head>
 <body>
 
+{% if user.is_authenticated %}
+
 <nav class="navbar is-transparent">
   <div class="navbar-brand">
-    <a class="navbar-item" href="{% url 'landingpage' %}">
-      <img src="/static/logo.png" alt="logo" width="112" height="28">
-    </a>
     <div class="navbar-burger burger" data-target="navbarTransp">
       <span></span>
       <span></span>
@@ -35,9 +34,6 @@
         <a class="navbar-item" href="{% url 'pictures' %}">
         Pictures
        </a>
-        <a class="navbar-item" href="{% url 'list_of_writings' %}">
-        Texts
-       </a>
     </div>
 
     <div class="navbar-end">
@@ -56,7 +52,7 @@
           </p>
 
           <p class="control">
-            <a class="button is-primary" href="{% url 'new_timeline_post' %}">
+            <a class="button is-primary" href="{% url 'create_post' %}">
               <span class="icon">
                 <i class="fa fa-plus"></i>
               </span>
@@ -69,7 +65,8 @@
     </div>
   </div>
 </nav>
-  	{% block content %}
+{% endif %}
+{% block content %}
 {% endblock %}
 
   </body>

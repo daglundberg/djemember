@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <style type="text/css">
+        .bg-img { 
+        background-image: url('/static/landing-bg.jpg');
+        background-position: center center;
+        background-repeat:  no-repeat;
+        background-attachment: fixed;
+        background-size:  cover;
+ }
+    </style>
+<section class="bg-img hero is-black is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title has-text-white is-size-1">
+        Christians minne
+      </h1>
+      <h2 class="subtitle has-text-white">
+        {% if next %}
+    {% if user.is_authenticated %}
+    Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.
+    {% else %}
+    Please login to see this page.
+    {% endif %}
+{% endif %}
+      </h2>
+
+
+{% if form.errors %}
+<div class="notification is-black">
+  Your username and password didn't match. Please try again.
+</div>
+{% endif %}
+
+
+<div class="columns">
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+
+<div class="field">
+  <div class="control input">
+    {{ form.username }}
+  </div>
+</div>
+
+<div class="field">
+  <div class="control input">
+{{ form.password }}
+  </div>
+</div>
+
+<input class="button is-white is-outlined" type="submit" value="Logga in >">
+<input type="hidden" name="next" value="{{ next }}">
+</form>
+</div>
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+
