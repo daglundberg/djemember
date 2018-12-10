@@ -8,7 +8,7 @@ urlpatterns = [
 
     # View memories
     path('', views.memories, name='memories'),
-    path('/<int:memory_id>/', views.memory_detail, name='memory_detail'),
+    path('<int:memory_id>/', views.memory_detail, name='memory_detail'),
 
     # View pictures
     path('pictures/', views.pictures, name='pictures'),
