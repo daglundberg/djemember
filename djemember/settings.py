@@ -31,6 +31,7 @@ LOGIN_REDIRECT_URL = 'landingpage'
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'memories.apps.MemoriesConfig',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

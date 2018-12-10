@@ -2,20 +2,11 @@
 
 {% block content %}
 
-    <style type="text/css">
-        .bg-img { 
-        background-image: url('/static/landing-bg.jpg');
-        background-position: center center;
-        background-repeat:  no-repeat;
-        background-attachment: fixed;
-        background-size:  cover;
- }
-    </style>
-<section class="bg-img hero is-black is-fullheight">
+<section class="hero is-black is-fullheight">
   <div class="hero-body">
     <div class="container">
       <h1 class="title has-text-white is-size-1">
-        Christians minne
+        Djemember
       </h1>
       <h2 class="subtitle has-text-white">
         {% if next %}
@@ -25,8 +16,7 @@
     {% else %}
     Please login to see this page.
     {% endif %}
-{% endif %}
-      </h2>
+{% endif %}</h2>
 
 
 {% if form.errors %}

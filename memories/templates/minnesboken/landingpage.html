@@ -1,18 +1,55 @@
 {% extends 'base.html' %}
+{% load humanize %}
 {% block title %}Djemember{% endblock %}
 {% block content %}
 
-<section id="share" class="paralax-image2">
-	<a href="{% url 'create_post' %}" class="more_link button"><span>Share a memory</span></a>
-	<p>This is a place where you can come together and remember.</p><br>
+<section class="hero is-primary">
+	<div class="hero-body">
+		<div class="container">
+			<h1 class="title">Welcome {{ user }}!</h1>
+			<h2 class="subtitle">This is a place where you can come together and remember.</h2>
+			<a href="{% url 'create_post' %}" class="button">Share a memory</a>
+		</div>
+	</div>
+</section>
+<section class="hero is-gray">
+	<div class="hero-body">
+		<div class="container">
+
+			<div class="box">
+				<article class="media">
+					<div class="media-left">
+						<figure class="image is-64x64">
+							<img src="{{ random_memory.userprofile.avatar_url }}" alt="Image">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p>
+								<strong>{{ random_memory.userprofile }}</strong>
+								<small>{{ random_memory.userprofile.connection_short }} </small>
+								<small>{{ random_memory.pub_date|naturaltime }} </small>
+								<br>
+								{{ random_memory.text }}
+							</p>
+						</div>
+					</div>
+				</article>
+			</div>
+
+			<a href="{% url 'memories' %}">Read from the memory book here ></a>
+		</div>
+	</div>
+</section>
+<section class="hero is-info">
+	<div class="hero-body">
+		<div class="container">
+		<a href="{% url 'pictures' %}">Se more pictures here ></a>
+		</div>
+	</div>
 </section>
 
-<section id="memories">
-	<p class="memorytxt"><img height="80" class="profilepic" src="{{ random_memory.userprofile.avatar_url }}"> {{ random_memory.text }}</p><br>
-	<a class="more_link" href="{% url 'memories' %}">Read from the memory book here ></a>
-</section>
 
-<section id="pictures" class="paralax-image3"><br>
-	<a class="more_link" href="{% url 'pictures' %}">Se more pictures here ></a>
-</section>
+
 {% endblock %}
+
