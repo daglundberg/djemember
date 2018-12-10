@@ -4,17 +4,17 @@
 {% load socialaccount %}
 {% providers_media_js %}
 <section>
-<h3>Logga in med hjälp av ditt facebook-konto:</h3>
-  <a class="button column" href="{% provider_login_url "facebook" method="js_sdk" %}">Logga in med Facebook</a>
+<h3>Log in using your facebook account:</h3>
+  <a class="button column" href="{% provider_login_url "facebook" method="js_sdk" %}">Log in with Facebook</a>
 
-    <h3>Logga in utan ett facebook-konto:</h3>
+    <h3>Log in without facebook:</h3>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button class="column" type="submit">Logga in</button>
+    <button class="column" type="submit">Log in</button>
   </form>
 
-<h3>Skapa ett nytt konto:</h3>
-  <a class="button column" href="{% url 'create_account' %}">Skapa ett nytt konto utan facebook</a>
+<h3>Create a new new account:</h3>
+  <a class="button column" href="{% url 'create_account' %}">Create a new account without facebook</a>
 </section>
 {% endblock %}
