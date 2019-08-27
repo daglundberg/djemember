@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+from django.utils.translation import gettext_lazy as _
 import os
+from pathlib import Path
+home = str(Path.home())
+
+SECRETS_FILE = home + '/Development/djemember/djemember_secrets/secrets'
+exec(open(SECRETS_FILE).read())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,11 +25,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 AUTH_USER_MODEL = 'core.User'
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
 SITE_ID = 1
-
 LOGIN_REDIRECT_URL = 'landingpage'
 
 # Application definition
@@ -70,22 +73,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djemember.wsgi.application'
 
-# Some settings we want to store as environment variables:
-
-SECRET_KEY = os.environ.get('SECRET_KEY', '')
-DEBUG = os.environ.get('DEBUG', '')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', os.environ.get('ALLOWED_IP', ''), ]
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DATABASE_ENGINE', ''),
-        'NAME': os.environ.get('DATABASE_NAME', ''),
-        'USER': os.environ.get('DATABASE_USER', ''),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
-        'HOST': os.environ.get('DATABASE_HOST', ''),
-        'PORT': os.environ.get('DATABASE_PORT', ''),
+        'ENGINE': DJANGO_DATABASE_ENGINE,
+        'NAME': DJANGO_DATABASE_NAME,
+        'USER': DJANGO_DATABASE_USER,
+        'PASSWORD': DJANGO_DATABASE_PASSWORD,
+        'HOST': DJANGO_DATABASE_HOST,
     }
 }
-
+DEBUG = DJANGO_DEBUG
+ALLOWED_HOSTS = DJANGO_ALLOWED_HOSTS
+SECRET_KEY = DJANGO_SECRET_KEY
+SESSION_COOKIE_SECURE = DJANGO_SESSION_COOKIE_SECURE
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
