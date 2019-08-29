@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section">
+	<div class="container">
+{% load crispy_forms_tags %}
+{# Display a form #}
+
+<form method="post" novalidate>
+   {% csrf_token %}
+   {{ form|crispy }}
+   <div class="field">
+     <button type="submit" class="button is-primary">Ok</button>
+   </div>
+   <input type="hidden" name="next" value="{{ next }}"/>
+</form>
+
+	</div>
+</section>
+{% endblock %}
