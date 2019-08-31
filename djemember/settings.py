@@ -27,7 +27,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUTH_USER_MODEL = 'core.User'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
-LOGIN_REDIRECT_URL = 'landingpage'
+LOGIN_REDIRECT_URL = '/memories'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -35,6 +36,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'memories.apps.MemoriesConfig',
     'crispy_forms',
+    'django_crispy_bulma',
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,9 +46,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = (
+    "bootstrap",
+    "uni_form",
+    "bootstrap3",
+    "bootstrap4",
+    "bulma",
+)
+
+CRISPY_TEMPLATE_PACK = "bulma"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

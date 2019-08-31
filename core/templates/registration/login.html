@@ -1,26 +1,26 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block content %}
 
-<section class="hero is-black is-fullheight">
+<section class="hero is-light is-fullheight">
   <div class="hero-body">
     <div class="container">
-      <h1 class="title has-text-white is-size-1">
+      <h1 class="title is-size-1">
         Djemember
       </h1>
-      <h2 class="subtitle has-text-white">
+      <h2 class="subtitle">
         {% if next %}
     {% if user.is_authenticated %}
-    Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.
+    {% trans "Your account doesn't have access to this page. To proceed,
+    please login with an account that has access." %}
     {% else %}
-    Please login to see this page.
+    {% trans "Please login to see this page." %}
     {% endif %}
 {% endif %}</h2>
 
 
 {% if form.errors %}
-<div class="notification is-black">
+<div class="notification is-danger">
   Your username and password didn't match. Please try again.
 </div>
 {% endif %}
@@ -30,24 +30,18 @@
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 
-<div class="field">
-  <div class="control input">
-    {{ form.username }}
-  </div>
-</div>
+{% load crispy_forms_tags %}
+<form method="post" novalidate>
+   {% csrf_token %}
+   {{ form|crispy }}
 
-<div class="field">
-  <div class="control input">
-{{ form.password }}
-  </div>
-</div>
-
-<input class="button is-white is-outlined" type="submit" value="Logga in >">
+<input class="button" type="submit" value="{% trans "Log in >" %}">
 <input type="hidden" name="next" value="{{ next }}">
 </form>
 </div>
+
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<p><a href="{% url 'password_reset' %}">{% trans "Lost password?" %}</a></p>
     </div>
   </div>
 </section>

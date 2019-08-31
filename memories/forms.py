@@ -1,5 +1,5 @@
 from django import forms
-from .models import Memory, #Picture,
+from .models import Memory #, Picture,
 
 
 class MemoryForm(forms.ModelForm):

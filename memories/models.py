@@ -4,7 +4,7 @@ from core.models import User
 
 
 class Memory(models.Model):
-    userprofile = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,)
     pub_date = models.DateTimeField('date published')
     text = models.TextField()
     timeline_date = models.DateTimeField('date taken', null=True, blank=True)

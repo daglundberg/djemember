@@ -1,13 +1,42 @@
-{% extends 'base.html' %}
-{% block title %}Minnesboken{% endblock %}
-{% block content %}
+{% extends 'generic_page.html' %}
+{% block title %}Memory{% endblock %}
+{% block page %}
 
-{% if latest_memories_list %}
+{% if memories %}
+{% for memory in memories %}
 
-    {% for memory in latest_memories_list %}
-    <div class="row">
-        <div class="column column-10 column-center" ><img class="column-center" src="{{ memory.userprofile.avatar_url }}"></div><a class="column" href="{% url 'memory_detail' memory.id %}">{{ memory.text }}</a>
+<div class="columns">
+	<div class="column is-one-third">
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <img src="{{ memory.userprofile.avatar_url }}" alt="Profile picture">
+      </figure>
     </div>
+    <div class="media-content">
+      <div class="content">
+        <p>
+          <strong>{{ memory.user.first_name }} {{ memory.user.last_name }}</strong> <small>{{ memory.pub_date|timesince}}</small>
+          <br>
+          {{ memory.text }}
+        </p>
+      </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+          <a href="{% url 'memory_detail' memory.id %}" class="level-item" aria-label="detail">
+            <span class="icon is-small">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </article>
+</div>
+</div>
+</div>
+
     {% endfor %}
 
 {% else %}

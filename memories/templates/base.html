@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   </head>
 <body>
-
 {% if user.is_authenticated %}
 
 <nav class="navbar is-transparent">
@@ -22,17 +22,8 @@
 
   <div id="navbarTransp" class="navbar-menu">
     <div class="navbar-start">
-       <a class="navbar-item" href="{% url 'landingpage' %}">
-        Start
-      </a>
-       <a class="navbar-item" href="{% url 'timeline' %}">
-        Timeline
-      </a>
        <a class="navbar-item" href="{% url 'memories' %}">
-        Memories
-       </a>
-        <a class="navbar-item" href="{% url 'pictures' %}">
-        Pictures
+        {% trans "Memories" %}
        </a>
     </div>
 
@@ -41,22 +32,22 @@
         <div class="field is-grouped">
 
           <p class="control">
-            <a class="bd-tw-button button" href="">
+            <a class="bd-tw-button button" href="{% url 'logout' %}">
               <span class="icon">
-                <i class="fa fa-user-circle"></i>
+                <i class="fa fa-logout"></i>
               </span>
               <span>
-                Account
+                {% trans "Log out" %}
               </span>
             </a>
           </p>
 
           <p class="control">
-            <a class="button is-primary" href="{% url 'create_post' %}">
+            <a class="button is-primary" href="{% url 'post_memory' %}">
               <span class="icon">
                 <i class="fa fa-plus"></i>
               </span>
-              <span>Share a memory</span>
+              <span>{% trans "Share a memory" %}</span>
             </a>
           </p>
 

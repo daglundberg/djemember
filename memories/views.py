@@ -10,10 +10,8 @@ from .forms import MemoryForm
 
 @login_required
 def memories(request):
-    latest_memories_list = Memory.objects.exclude(timeline_date__isnull=False).order_by('-pub_date')[:5]
-    # latest_memories_list = Memory.objects.order_by
-    # pics = get_list_or_404(UserProfile)
-    context = {'latest_memories_list': latest_memories_list}
+    memories = Memory.objects.all().order_by('-pub_date')[:5]
+    context = {'memories': memories}
     return render(request, 'minnesboken/memories/memories.html', context)
 
 
@@ -23,32 +21,22 @@ def memory_detail(request, memory_id):
     return render(request, 'minnesboken/memories/memory_detail.html', {'memory': memory})
 
 
-# @login_required
-# def create_post(request):
-#     if request.method == "POST":
-#         form = MemoryForm(request.POST)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.userprofile = request.user
-#             post.pub_date = timezone.now()
-#             post.text = request.POST['text']
-#             if (form.data.get('timeline_date', False)):
-#                 post.timeline_date = request.POST['timeline_date']
-#             post.save()
-#             return redirect('timeline')
-#     else:
-#         form = MemoryForm()
-#     return render(request, 'minnesboken/memories/create_post.html', {'form': form})
-
-
-# @login_required
-# def post_memory(request):  # TODO: Have some fun here
-#     mymemory = Memory(userprofile=request.user, memory_text=request.POST['text'], pub_date=timezone.now())
-#     mymemory.save()
-#     # Always return an HttpResponseRedirect after successfully dealing
-#     # with POST data. This prevents data from being posted twice if a
-#     # user hits the Back button.
-#     return HttpResponseRedirect(reverse('memories'))
+@login_required
+def post_memory(request):
+    if request.method == "POST":
+        form = MemoryForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.pub_date = timezone.now()
+            post.text = request.POST['text']
+            if (form.data.get('timeline_date', False)):
+                post.timeline_date = request.POST['timeline_date']
+            post.save()
+            return redirect('memories')
+    else:
+        form = MemoryForm()
+    return render(request, 'minnesboken/memories/post_memory.html', {'form': form})
 
 
 # @login_required

@@ -1,13 +1,23 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block page %}
 
+
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
   <p>{{ memory.text }}</p>
-
+      </div>
+    </div>
+  </article>
+</div>
 
 {% for picture in memory.picture_set.all %}
    <img src="{{ picture.url }}" />
    <p>{{ picture.picture_text }}</p>
 {% endfor %}
-<p>Skrivet av {{ memory.userprofile }}. Publicerat {{ memory.pub_date}}</p>
+<p>{% trans "Written by" %} {{ memory.user.first_name }} {{ memory.user.last_name }} @{{ memory.user }}.</p>
+<p>{% trans "Published" %} {{ memory.pub_date}}</p>
 
 {% endblock %}

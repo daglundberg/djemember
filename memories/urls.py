@@ -8,7 +8,7 @@ urlpatterns = [
     path('<int:memory_id>/', views.memory_detail, name='memory_detail'),
 
     # Post memories
-    # path('create-post/', views.create_post, name='create_post'),
+    path('post/', views.post_memory, name='post_memory'),
 
     # View pictures
     # path('pictures/', views.pictures, name='pictures'),

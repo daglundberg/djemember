@@ -1,0 +1,15 @@
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block page %}
+<h1 class="title">{% trans "Share a memory" %}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% load crispy_forms_tags %}
+<form method="post" novalidate>
+   {% csrf_token %}
+   {{ form|crispy }}
+   <button type="submit" class="save button is-primary">{% trans "Post" %}</button>
+</form>
+
+{% endblock %}
