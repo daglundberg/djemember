@@ -9,7 +9,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'email', 'connection_to_deceased', 'connection_short', 'password1', 'password2', )
+        fields = ('username', 'first_name', 'email', 'connection_verbose', 'connection_short', 'password1', 'password2', )
         widgets = {
             'username': TextInput(attrs={'class': "input"}),
             'firs_name': TextInput(attrs={'class': "input"}),

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from .models import Memory, Picture
-from random import randint
+from core.models import User
 from django.utils import timezone
 from .forms import MemoryForm
 
@@ -37,26 +37,6 @@ def post_memory(request):
     else:
         form = MemoryForm()
     return render(request, 'minnesboken/memories/post_memory.html', {'form': form})
-
-
-# @login_required
-# def landingpage(request):
-#     public_pictures = Picture.objects.filter(is_featured_publicly=True)
-#     public_memories = Memory.objects.filter(is_featured_publicly=True)
-
-#     if public_pictures.count() > 0:
-#         random_picture = public_pictures[randint(0, public_pictures.count() - 1)]
-#     else:
-#         random_picture = "No public pictures."
-
-#     if public_memories.count() > 0:
-#         random_memory = public_memories[randint(0, public_memories.count() - 1)]
-#     else:
-#         random_memory = "No public memories."
-
-#     return render(request, 'minnesboken/landingpage.html', {
-#                            'random_picture': random_picture,
-#                            'random_memory': random_memory})
 
 
 # @login_required

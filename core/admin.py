@@ -13,7 +13,7 @@ class MyUserAdmin(UserAdmin):
     form = MyUserChangeForm
 
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('connection_to_deceased', 'connection_short', 'location', 'avatar_url')}),
+        (None, {'fields': ('connection_verbose', 'connection_short', 'location', 'avatar_url')}),
     )
 
 

@@ -10,27 +10,22 @@
 <div class="box">
   <article class="media">
     <div class="media-left">
-      <figure class="image is-64x64">
-        <img src="{{ memory.userprofile.avatar_url }}" alt="Profile picture">
-      </figure>
+     <a href="{% url "user_detail" memory.user %}"> <figure class="image is-64x64">
+        <img src="{{ memory.user.avatar_url }}" alt="Profile picture">
+      </figure></a>
     </div>
-    <div class="media-content">
-      <div class="content">
-        <p>
-          <strong>{{ memory.user.first_name }} {{ memory.user.last_name }}</strong> <small>{{ memory.pub_date|timesince}}</small>
+    <div class="media-content">   
+    
+          <a href="{% url "user_detail" memory.user %}"><strong>{{ memory.user.first_name }} {{ memory.user.last_name }}</strong></a>
+<a href="{% url 'memory_detail' memory.id %}">
+<span>
+        <small>{{ memory.pub_date|timesince}}</small>
           <br>
-          {{ memory.text }}
-        </p>
-      </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a href="{% url 'memory_detail' memory.id %}" class="level-item" aria-label="detail">
-            <span class="icon is-small">
-              <i class="fa fa-info-circle" aria-hidden="true"></i>
-            </span>
-          </a>
-        </div>
-      </nav>
+         
+         <p> {{ memory.text }} </p>
+        </span>
+       </a>
+    
     </div>
   </article>
 </div>

@@ -1,0 +1,22 @@
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block page %}
+
+
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+      	<figure class="image is-64x64">
+        	<img src="{{ user.avatar_url }}" alt="Profile picture">
+      	</figure>
+  		<strong>{{ user.first_name }} {{ user.last_name }}</strong> @<small>{{ user.username }}</small>
+  		<p>{{ user.connection_verbose }} {{ user.connection_short }}</p>
+  		<p>{{ user.location }}</p>
+
+      </div>
+    </div>
+  </article>
+</div>
+
+{% endblock %}
