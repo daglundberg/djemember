@@ -30,7 +30,7 @@ def landingpage(request):
 @login_required
 def user_detail(request, username):
     user = get_object_or_404(User, username=username)
-    return render(request, 'minnesboken/memories/user_detail.html', {'user': user})
+    return render(request, 'user_detail.html', {'user': user})
 
 
 #     public_pictures = Picture.objects.filter(is_featured_publicly=True)

@@ -19,7 +19,7 @@
           <a href="{% url "user_detail" memory.user %}"><strong>{{ memory.user.first_name }} {{ memory.user.last_name }}</strong></a>
 <a href="{% url 'memory_detail' memory.id %}">
 <span>
-        <small>{{ memory.pub_date|timesince}}</small>
+       <small>{{ memory.user.connection_short }}</small> <small>{{ memory.pub_date|timesince}}</small>
           <br>
          
          <p> {{ memory.text }} </p>

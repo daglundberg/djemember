@@ -10,8 +10,8 @@
       	<figure class="image is-64x64">
         	<img src="{{ user.avatar_url }}" alt="Profile picture">
       	</figure>
-  		<strong>{{ user.first_name }} {{ user.last_name }}</strong> @<small>{{ user.username }}</small>
-  		<p>{{ user.connection_verbose }} {{ user.connection_short }}</p>
+  		<strong>{{ user.first_name }} {{ user.last_name }}</strong> <small>{{ user.connection_short }}</small>
+  		<p>{{ user.connection_verbose }}</p>
   		<p>{{ user.location }}</p>
 
       </div>
