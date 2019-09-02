@@ -12,13 +12,13 @@ from .forms import MemoryForm
 def memories(request):
     memories = Memory.objects.all().order_by('-pub_date')[:5]
     context = {'memories': memories}
-    return render(request, 'minnesboken/memories/memories.html', context)
+    return render(request, 'memories/memories.html', context)
 
 
 @login_required
 def memory_detail(request, memory_id):
     memory = get_object_or_404(Memory, pk=memory_id)
-    return render(request, 'minnesboken/memories/memory_detail.html', {'memory': memory})
+    return render(request, 'memories/memory_detail.html', {'memory': memory})
 
 
 @login_required
@@ -36,23 +36,23 @@ def post_memory(request):
             return redirect('memories')
     else:
         form = MemoryForm()
-    return render(request, 'minnesboken/memories/post_memory.html', {'form': form})
+    return render(request, 'memories/post_memory.html', {'form': form})
 
 
 # @login_required
 # def timeline(request):
 #     timeline_memories_list = Memory.objects.exclude(timeline_date__isnull=True).order_by('timeline_date')
-#     return render(request, 'minnesboken/memories/timeline.html', {'timeline_memories_list': timeline_memories_list, })
+#     return render(request, 'memories/timeline.html', {'timeline_memories_list': timeline_memories_list, })
 
 
 # @login_required
 # def pictures(request):
 #     latest_pictures_list = Picture.objects.order_by('-date_taken')[:5]
 #     context = {'latest_pictures_list': latest_pictures_list}
-#     return render(request, 'minnesboken/pictures/pictures.html', context)
+#     return render(request, 'pictures/pictures.html', context)
 
 
 # @login_required
 # def picture_detail(request, picture_id):
 #     picture = get_object_or_404(Picture, pk=picture_id)
-#     return render(request, 'minnesboken/pictures/picture_detail.html', {'picture': picture})
+#     return render(request, 'pictures/picture_detail.html', {'picture': picture})
