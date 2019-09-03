@@ -1,16 +1,16 @@
-from django import forms
-from .models import Memory #, Picture,
+# from django import forms
+# from .models import Memory #, Picture,
 
 
-class MemoryForm(forms.ModelForm):
-    timeline_date = forms.DateField(required=False)
+# class MemoryForm(forms.ModelForm):
+#     timeline_date = forms.DateField(required=False)
 
-    class Meta:
-        model = Memory
-        fields = ('text', 'timeline_date')
-        labels = {
-            "text": "Memory text",
-            "timeline_date": "If this memory is connected to a specific moment in time, please enter an aproximate date for this memory."}
+#     class Meta:
+#         model = Memory
+#         fields = ('text', 'timeline_date')
+#         labels = {
+#             "text": "Memory text",
+#             "timeline_date": "If this memory is connected to a specific moment in time, please enter an aproximate date for this memory."}
 
 
 # class PictureForm(forms.ModelForm):

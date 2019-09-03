@@ -2,10 +2,10 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse, redirect
-from .models import Memory, Picture
+from .models import Memory, Picture, Chapter
 from core.models import User
 from django.utils import timezone
-from .forms import MemoryForm
+#from .forms import MemoryForm
 
 
 @login_required
@@ -21,28 +21,30 @@ def memory_detail(request, memory_id):
     return render(request, 'memories/memory_detail.html', {'memory': memory})
 
 
-@login_required
-def post_memory(request):
-    if request.method == "POST":
-        form = MemoryForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.pub_date = timezone.now()
-            post.text = request.POST['text']
-            if (form.data.get('timeline_date', False)):
-                post.timeline_date = request.POST['timeline_date']
-            post.save()
-            return redirect('memories')
-    else:
-        form = MemoryForm()
-    return render(request, 'memories/post_memory.html', {'form': form})
-
-
 # @login_required
-# def timeline(request):
-#     timeline_memories_list = Memory.objects.exclude(timeline_date__isnull=True).order_by('timeline_date')
-#     return render(request, 'memories/timeline.html', {'timeline_memories_list': timeline_memories_list, })
+# def post_memory(request):
+#     if request.method == "POST":
+#         form = MemoryForm(request.POST)
+#         if form.is_valid():
+#             post = form.save(commit=False)
+#             post.user = request.user
+#             post.pub_date = timezone.now()
+#             post.text = request.POST['text']
+#             if (form.data.get('timeline_date', False)):
+#                 post.timeline_date = request.POST['timeline_date']
+#             post.save()
+#             return redirect('memories')
+#     else:
+#         form = MemoryForm()
+#     return render(request, 'memories/post_memory.html', {'form': form})
+
+
+# TODO: Improve this ugly code!! Currently highly inefficient. (It's looping through the same memories many times for instance..)
+# The idea is to combine all the memories and chapters in to one sorted list instead of trying to sort them in the template
+@login_required
+def timeline(request):
+    memories = Memory.objects.exclude(date__isnull=True).order_by('date')
+    return render(request, 'memories/timeline.html', {'memories': memories})
 
 
 # @login_required

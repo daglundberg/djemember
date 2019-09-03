@@ -4,23 +4,24 @@ from core.models import User
 
 
 class Memory(models.Model):
+    date = models.DateTimeField('timeline date')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,)
     pub_date = models.DateTimeField('date published')
-    text = models.TextField()
-    timeline_date = models.DateTimeField('date taken', null=True, blank=True)
-    is_featured_publicly = models.BooleanField(default=False)
-
-    def __str__(self):
-        return force_text(self.pub_date)
+    caption = models.CharField(max_length=230, null=True, blank=True)
 
 
-class Picture(models.Model):
-    memory = models.ForeignKey(Memory, on_delete=models.SET_NULL, blank=True, null=True,)
+class Text(Memory):
+    long_text = models.TextField()
+
+
+class Picture(Memory):
     url = models.CharField(max_length=200)
-    picture_text = models.CharField(max_length=230)
-    picture_location = models.CharField(max_length=80)
-    date_taken = models.DateTimeField('date taken')
-    is_featured_publicly = models.BooleanField(default=False)
+    location = models.CharField(max_length=80, null=True, blank=True)
 
-    def __str__(self):
-        return self.url
+
+class Milestone(Memory):
+    image_url = models.CharField(max_length=200, null=True, blank=True)
+
+
+class Chapter(Milestone):
+    background_image_url = models.CharField(max_length=200)

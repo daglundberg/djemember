@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Minnesboken{% endblock %}
+{% block navbar %}
+
+{% endblock %}
+{% block content %}
+<style type="text/css">
+  .has-background {
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+  }
+
+  .container
+  {
+    border-left-width: 4px;
+    border-left-style: dashed;
+    padding-left: 12px;
+  }
+</style>
+
+{% for memory in memories %}
+
+{% for memory in chapter.memories %}
+
+<div class="hero is-dark is-fullheight has-background" style="background-image: url('{{ chapter.background_image_url }}');">
+  <div class="hero-body">
+    <div class="container">
+      {% if chapter.small_image_url %}
+      <img src="{{ chapter.small_image_url }}">
+      {% endif %}
+      <h1 class="title">
+
+       {{ chapter.start_date.date }}
+     </h1>
+     <h3 class="subtitle">
+      {{ chapter.text }}
+    </h3>
+  </div>
+</div>
+</div>
+<div class="hero is-dark has-background" style="background-image: url('{{ chapter.background_image_url }}');">
+  <div class="hero-body">
+    <div class="container">
+
+     {% for memory in chapter.memories %}
+
+
+     {% ifchanged memory.timeline_date.year %}
+     <h1 class="title">{{ memory.timeline_date.year }}</h1>
+     {% endifchanged %}
+
+    {% if memory.is_milestone %}
+      <h1 class="title">
+       {{ memory.timeline_date.date }}
+     </h1>
+     <h3 class="subtitle">
+      {{ memory.text }}
+    </h3>
+
+    {% else %}
+           <div class="columns">
+      <div class="column is-one-third">
+        <div class="box">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="{{ memory.user.avatar_url }}">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>{{ memory.user.first_name }} {{ memory.user.last_name }}</strong> <small>{{ memory.user.connection_short }}</small> <small>{{ memory.pub_date|timesince}}</small>
+                  <br>
+                  {{ memory.text }}
+                </p>
+              </div>
+            </div>
+          </article></div></div></div>       
+
+          {% endif %}   
+
+              {% endfor %}
+
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+
+      {% endblock %}

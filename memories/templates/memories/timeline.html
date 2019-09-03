@@ -1,61 +1,88 @@
 {% extends 'base.html' %}
 {% block title %}Minnesboken{% endblock %}
+{% block navbar %} {% endblock %}
 {% block content %}
+{% load i18n %}
+<style type="text/css">
+  .has-background{background-position: center center;background-repeat:no-repeat;background-attachment:fixed;background-size:cover;}
+  .container{border-left-width:4px;border-left-style:dashed;padding-left:12px;}
+  .image img{height: 100%;object-fit: cover;}
+</style><div><div><div>
 
-<img class="center startpic" src="/static/timeline/christianbaby.png">
-<div><p class="presentation">Christian kom till världen vintern <strong>1984</strong> i Falun</p></div>
+{% for memory in memories %}
 
-<section>
-{% for memory in timeline_memories_list %}
+{% if memory.picture %}
+     <div class="columns">
+      <div class="column is-half">
+        <div class="box">
+          <article class="media">  
+            <div class="media-content">
+              <div class="content">
+                <img src="{{ memory.picture.url }}">                
+                  <strong>{{ memory.picture.caption }} </strong><br>
+                  <small> {% trans "Uploaded by" %} {{ memory.picture.user.first_name }} {{ memory.picture.user.last_name }} - {{ memory.picture.pub_date|timesince}}</small>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div> 
 
-{% ifchanged memory.timeline_date.year %}
-</section>
-<section class="full-year" id="year{{ memory.timeline_date.year }}">
-<div><h3 class="year">{{ memory.timeline_date.year }}</h3></div>
-{% endifchanged %}
+{% elif memory.text %}
+     <div class="columns">
+      <div class="column is-one-third">
+        <div class="box">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="{{ memory.text.user.avatar_url }}">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <strong>{{ memory.text.user.first_name }} {{ memory.text.user.last_name }}</strong> <small>{{ memory.text.user.connection_short }}</small> <small>{{ memory.text.pub_date|timesince}}</small>
+                  <br>
+                  {{ memory.text.long_text }}
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div> 
 
-<section  class="timelinerow">
-	<div class="lefty">
-		{% if forloop.counter|divisibleby:2 %}
+{% elif memory.milestone.chapter %}
+    </div>
+  </div>
+</div>
+<div class="hero is-dark is-fullheight has-background" style="background-image: url('{{ memory.milestone.chapter.background_image_url }}');">
+  <div class="hero-body">
+    <div class="container">
+      {% if memory.milestone.chapter.image_url %}
+      <img src="{{ memory.milestone.chapter.image_url }}">
+      {% endif %}
+      <h1 class="title">
+         {{ memory.milestone.chapter.date }}
+     </h1>
+     <h3 class="subtitle">
+      {{ memory.milestone.chapter.caption }}
+    </h3>
 
-		<p class="float-right whitebox comment animate">
-					<img height="40" class="float-left smallprofile" src="{{ memory.userprofile.avatar_url }}">
-			{{ memory.text }}
-			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
-		</p>
-		{% else %}
-		{% for picture in memory.picture_set.all %}	
-		<div class="thumb whitebox float-right animate">
-			<img alt="some picture" />
-			<p class="picture_text">
-				{{ picture.picture_text }}
-			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
-		</div>
-		{% endfor %}
-		{% endif %}
+{% elif memory.milestone %}
+      {% if memory.milestone.image_url %}
+      <img src="{{ memory.milestone.image_url }}">
+      {% endif %}
+      <h1 class="title">
+         {{ memory.milestone.date }}
+     </h1>
+     <h3 class="subtitle">
+      {{ memory.milestone.caption }}
+    </h3>
+{% endif %}
 
-	</div>
-	<div class="righty">
-		{% if forloop.counter|divisibleby:2 %}
-		{% for picture in memory.picture_set.all %}	
-		<div class="thumb whitebox animate">
-			<img alt="some picture" />
-			<p class="picture_text">
-				{{ picture.picture_text }}
-			</p><a href="{% url 'picture_detail' picture.id %}"><span></span></a>
-		</div>
-		{% endfor %}
-		{% else %}
-		<p class="float-left whitebox comment animate">
-		<img height="40" class="float-right smallprofile" src="{{ memory.userprofile.avatar_url }}">
-			{{ memory.text }}
-			<a href="{% url 'memory_detail' memory.id %}"><span></span></a>
-		</p>
-		{% endif %}
-		
-	</div>
-
-</section>
 {% endfor %}
-
+    </div>
+  </div>
+</div>
 {% endblock %}
