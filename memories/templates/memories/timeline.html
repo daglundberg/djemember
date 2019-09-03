@@ -56,11 +56,16 @@
     </div>
   </div>
 </div>
-<div class="hero is-dark is-fullheight has-background" style="background-image: url('{{ memory.milestone.chapter.background_image_url }}');">
+<div class="hero {% if memory.milestone.chapter.background_class %} memory.milestone.chapter.background_class {% else %}is-dark{% endif %} is-fullheight has-background" style="background-image: url('{{ memory.milestone.chapter.background_image_url }}');">
   <div class="hero-body">
     <div class="container">
       {% if memory.milestone.chapter.image_url %}
-      <img src="{{ memory.milestone.chapter.image_url }}">
+                  <figure class="media-left">
+              <p class="image is-128x128">
+                <img class="is-rounded" src="{{ memory.milestone.chapter.image_url }}">
+              </p>
+            </figure>
+
       {% endif %}
       <h1 class="title">
          {{ memory.milestone.chapter.date }}

@@ -25,3 +25,4 @@ class Milestone(Memory):
 
 class Chapter(Milestone):
     background_image_url = models.CharField(max_length=200)
+    background_class = models.CharField(max_length=12, null=True, blank=True)
