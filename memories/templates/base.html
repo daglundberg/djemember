@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
   </head>
 <body>
 
@@ -28,37 +28,33 @@
     <div class="navbar-start">
     </div>
     <div class="navbar-end">
-
-    <a class="navbar-item" href="{% url 'memories' %}">
-        {% trans "Memories" %}
-       </a>
-       <a class="navbar-item" href="{% url 'timeline' %}">
-        {% trans "Timeline" %}
-       </a>
-
       <div class="navbar-item">
         <div class="field is-grouped">
-
-          <p class="control">
-            <a class="bd-tw-button button" href="{% url 'logout' %}">
-              <span class="icon">
-                <i class="fa fa-sign-out"></i>
-              </span>
-              <span>
-                {% trans "Log out" %}
-              </span>
-            </a>
-          </p>
-
-          <p class="control">
-            <a class="button is-primary" href="#">
-              <span class="icon">
-                <i class="fa fa-plus"></i>
-              </span>
+          <p class="control"><a href="{% url "memories" %}" class="button">Home</a></p>
+          <p class="control"><a href="{% url "timeline" %}" class="button">Timeline</a></p>
+          <a class="button is-primary is-outlined" href="{% url "post_text" %}">
+              <span class="icon"><i class="fa fa-plus"></i></span>
               <span>{% trans "Share a memory" %}</span>
-            </a>
-          </p>
+          </a>
+        <div class="navbar-item has-dropdown is-hoverable">
 
+        <a class="navbar-link is-arrowless">
+         {{ user.first_name }}
+        </a>
+        <div class="navbar-dropdown is-boxed">
+          <a class="navbar-item" href="{% url "user_detail" user %}">
+            Profile
+          </a>
+          <a class="navbar-item" href="#">
+            Settings
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item" href="{% url "logout" %}">
+            Log out
+          </a>
+
+        </div>
+      </div>
         </div>
       </div>
     </div>
@@ -72,8 +68,7 @@
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      <strong>Djemember</strong> is an <a href="https://github.com/daggepagge/djemember">open source</a> project for creating memorial websites with django.
-      <br>Its written and maintained by Dag Lundberg and Per Faxen</a>.
+      <strong>Djemember</strong> is an <a href="https://github.com/daggepagge/djemember">open source</a> project for creating memorial websites with django.</a>
     </p>
   </div>
 </footer>

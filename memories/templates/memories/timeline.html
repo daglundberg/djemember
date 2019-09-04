@@ -19,7 +19,7 @@
           <article class="media">  
             <div class="media-content">
               <div class="content">
-                <img src="/{{ memory.picture.image.url }}"><br>
+                <img src="{{ memory.picture.image.url }}"><br>
                   <strong>{{ memory.picture.caption }} </strong><br>
                   <small> {% trans "Uploaded by" %} {{ memory.picture.user.first_name }} {{ memory.picture.user.last_name }} - {{ memory.picture.pub_date|timesince}}</small>
               </div>
@@ -63,11 +63,38 @@
 <nav class="navbar is-transparent is-fixed-top">
 <div class="container">
   <div class="navbar-menu">
+
+
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="field is-grouped">
           <p class="control"><a href="{% url "memories" %}" class="button is-white is-outlined">Home</a></p>
-          <p class="control"><a href="{% url "post_text" %}" class="button is-white is-outlined">Share memory</a></p>
+          <p class="control"><a href="{% url "timeline" %}" class="button is-white is-outlined">Timeline</a></p>
+          <a class="button is-white is-outlined" href="{% url "post_text" %}">
+              <span class="icon"><i class="fa fa-plus"></i></span>
+              <span>{% trans "Share a memory" %}</span>
+          </a>
+
+
+        <div class="navbar-item has-dropdown is-hoverable">
+
+        <a class="navbar-link is-arrowless">
+         {{ user.first_name }}
+        </a>
+        <div class="navbar-dropdown is-boxed has-background-grey">
+          <a class="navbar-item" href="{% url "user_detail" user %}">
+            Profile
+          </a>
+          <a class="navbar-item" href="#">
+            Settings
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item" href="{% url "logout" %}">
+            Log out
+          </a>
+
+        </div>
+      </div>
         </div>
       </div>
     </div>

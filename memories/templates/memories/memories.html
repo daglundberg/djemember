@@ -14,21 +14,21 @@
 <div class="box">
   <article class="media">
     <div class="media-left">
-     <a href="{% url "user_detail" memory.user %}"> <figure class="image is-64x64">
+ <figure class="image is-64x64">
         <img src="{{ memory.user.avatar_url }}" alt="Profile picture">
-      </figure></a>
+      </figure>
     </div>
     <div class="media-content">   
     
           <a href="{% url "user_detail" memory.user %}"><strong>{{ memory.user.first_name }} {{ memory.user.last_name }}</strong></a>
-<a href="{% url 'memory_detail' memory.id %}">
-<span>
+
+
        <small>{{ memory.user.connection_short }}</small> <small>{{ memory.pub_date|timesince}}</small>
           <br>
          
          <p> {{ memory.text.long_text }} </p>
-        </span>
-       </a>
+ 
+   
     
     </div>
   </article>
