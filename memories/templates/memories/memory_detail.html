@@ -7,7 +7,7 @@
   <article class="media">
     <div class="media-content">
       <div class="content">
-  <p>{{ memory.text }}</p>
+  <p>{{ memory.text.long_text }}</p>
       </div>
     </div>
   </article>
@@ -17,7 +17,7 @@
    <img src="{{ picture.url }}" />
    <p>{{ picture.picture_text }}</p>
 {% endfor %}
-<p>{% trans "Written by" %} {{ memory.user.first_name }} {{ memory.user.last_name }} @{{ memory.user }}.</p>
+<p>{% trans "Written by" %} <a href="{% url "user_detail" memory.user %}"><strong>{{ memory.user.first_name }} {{ memory.user.last_name }} </strong></a><small>{{ memory.user.connection_short }}</small>.</p>
 <p>{% trans "Published" %} {{ memory.pub_date}}</p>
 
 {% endblock %}

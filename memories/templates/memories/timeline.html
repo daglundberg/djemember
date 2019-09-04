@@ -5,8 +5,9 @@
 {% load i18n %}
 <style type="text/css">
   .has-background{background-position: center center;background-repeat:no-repeat;background-attachment:fixed;background-size:cover;}
-  .container{border-left-width:4px;border-left-style:dashed;padding-left:12px;}
+  .has-line{border-left-width:4px;border-left-style:dashed;padding-left:12px;}
   .image img{height: 100%;object-fit: cover;}
+  .is-rounded{border-width:3px;border-style:solid;}
 </style><div><div><div>
 
 {% for memory in memories %}
@@ -18,7 +19,7 @@
           <article class="media">  
             <div class="media-content">
               <div class="content">
-                <img src="{{ memory.picture.url }}">                
+                <img src="/{{ memory.picture.image.url }}"><br>
                   <strong>{{ memory.picture.caption }} </strong><br>
                   <small> {% trans "Uploaded by" %} {{ memory.picture.user.first_name }} {{ memory.picture.user.last_name }} - {{ memory.picture.pub_date|timesince}}</small>
               </div>
@@ -41,7 +42,7 @@
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong>{{ memory.text.user.first_name }} {{ memory.text.user.last_name }}</strong> <small>{{ memory.text.user.connection_short }}</small> <small>{{ memory.text.pub_date|timesince}}</small>
+                  <a href="{% url "user_detail" memory.user %}"><strong>{{ memory.text.user.first_name }} {{ memory.text.user.last_name }}</strong></a> <small>{{ memory.text.user.connection_short }}</small> <small>{{ memory.text.pub_date|timesince}}</small>
                   <br>
                   {{ memory.text.long_text }}
                 </p>
@@ -56,9 +57,27 @@
     </div>
   </div>
 </div>
-<div class="hero {% if memory.milestone.chapter.background_class %} memory.milestone.chapter.background_class {% else %}is-dark{% endif %} is-fullheight has-background" style="background-image: url('{{ memory.milestone.chapter.background_image_url }}');">
+<div class="hero is-fullheight {% if memory.milestone.chapter.background_class %} memory.milestone.chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{{ memory.milestone.chapter.background_image_url }}');">
+
+{% if forloop.first %}
+<nav class="navbar is-transparent is-fixed-top">
+<div class="container">
+  <div class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control"><a href="{% url "memories" %}" class="button is-white is-outlined">Home</a></p>
+          <p class="control"><a href="{% url "post_text" %}" class="button is-white is-outlined">Share memory</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>
+{% endif %}
+  
   <div class="hero-body">
-    <div class="container">
+    <div class="container has-line">
       {% if memory.milestone.chapter.image_url %}
                   <figure class="media-left">
               <p class="image is-128x128">
@@ -68,7 +87,7 @@
 
       {% endif %}
       <h1 class="title">
-         {{ memory.milestone.chapter.date }}
+         {{ memory.milestone.chapter.date.date }}
      </h1>
      <h3 class="subtitle">
       {{ memory.milestone.chapter.caption }}
@@ -79,7 +98,7 @@
       <img src="{{ memory.milestone.image_url }}">
       {% endif %}
       <h1 class="title">
-         {{ memory.milestone.date }}
+         {{ memory.milestone.date.date }}
      </h1>
      <h3 class="subtitle">
       {{ memory.milestone.caption }}

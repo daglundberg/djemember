@@ -2,6 +2,10 @@
 {% block title %}Memory{% endblock %}
 {% block page %}
 
+<style type="text/css">
+  .image img{height: 100%;object-fit: cover;}
+</style>
+
 {% if memories %}
 {% for memory in memories %}
 
@@ -22,7 +26,7 @@
        <small>{{ memory.user.connection_short }}</small> <small>{{ memory.pub_date|timesince}}</small>
           <br>
          
-         <p> {{ memory.text }} </p>
+         <p> {{ memory.text.long_text }} </p>
         </span>
        </a>
     
