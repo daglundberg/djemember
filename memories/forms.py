@@ -1,15 +1,28 @@
 from django import forms
-from .models import Memory, Text, Picture
+from .models import Memory, Picture
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
 class TextForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='button is-primary'))
+    helper.form_method = 'POST'
     class Meta:
-        model = Text
-        fields = ('long_text', 'date')
+        model = Memory
+        fields = ('text', 'date')
         labels = {
             "long_text": "Memory text",
             "date": "If this memory is connected to a specific moment in time, please enter an aproximate date."}
+
+
+class CommentForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.add_input(Submit('submit', 'Submit', css_class='button is-primary'))
+    helper.form_method = 'POST'
+    class Meta:
+        model = Memory
+        fields = ('text',)
+        labels = {"text": "Comment"}
 
 
 class PictureForm(forms.ModelForm):

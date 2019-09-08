@@ -1,0 +1,9 @@
+      {% if item.milestone.image %}
+      <img src="{{ item.milestone.image.url }}">
+      {% endif %}
+      <h1 class="title">
+         {{ item.milestone.date.date }}
+     </h1>
+     <h3 class="subtitle">
+      {{ item.milestone.caption }}
+    </h3>

@@ -13,55 +13,10 @@
 {% if user.is_authenticated %}
 {% block navbar %}
 
-
-<nav class="navbar is-transparent">
-  <div class="container">
-  <div class="navbar-brand">
-    <div class="navbar-burger burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-
-  <div class="navbar-menu">
-    <div class="navbar-start">
-    </div>
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="field is-grouped">
-          <p class="control"><a href="{% url "memories" %}" class="button">Home</a></p>
-          <p class="control"><a href="{% url "timeline" %}" class="button">Timeline</a></p>
-          <a class="button is-primary is-outlined" href="{% url "post_text" %}">
-              <span class="icon"><i class="fa fa-plus"></i></span>
-              <span>{% trans "Share a memory" %}</span>
-          </a>
-        <div class="navbar-item has-dropdown is-hoverable">
-
-        <a class="navbar-link is-arrowless">
-         {{ user.first_name }}
-        </a>
-        <div class="navbar-dropdown is-boxed">
-          <a class="navbar-item" href="{% url "user_detail" user %}">
-            Profile
-          </a>
-          <a class="navbar-item" href="#">
-            Settings
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item" href="{% url "logout" %}">
-            Log out
-          </a>
-
-        </div>
-      </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</nav>
+   {% include "memories/components/navbar.html" %}
+   <br><br>
 {% endblock %}
+
 {% endif %}
 {% block content %}
 {% endblock %}

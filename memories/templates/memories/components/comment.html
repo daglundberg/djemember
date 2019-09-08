@@ -1,0 +1,17 @@
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-48x48">
+          <img src="{{ comment.user.avatar_url }}">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <a href="{% url "user_detail" comment.user %}"><strong>{{ comment.user.first_name }} {{ comment.user.last_name }}</strong></a><small> {{ comment.user.connection_short }}</small>
+            <br>
+             {{ comment.text }}
+                  <br><small>{{ comment.pub_date|timesince}}</small>
+          </p>
+        </div>
+      </div>
+    </article>

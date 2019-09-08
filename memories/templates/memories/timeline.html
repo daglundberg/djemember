@@ -8,20 +8,64 @@
   .has-line{border-left-width:4px;border-left-style:dashed;padding-left:12px;}
   .image img{height: 100%;object-fit: cover;}
   .is-rounded{border-width:3px;border-style:solid;}
-</style><div><div><div>
+</style>
 
-{% for memory in memories %}
 
-{% if memory.picture %}
+<div class="hero {% if first_chapter.background_class %} first_chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{{ first_chapter.background_image.url }}');">
+
+   {% include "memories/components/navbar.html" %}
+  
+  <div class="hero-body">
+    <div class="container">
+
+{% for item in timeline_items %}
+
+{% if item.milestone.chapter %}
+    </div>
+  </div>
+</div>
+<div class="hero is-fullheight {% if item.milestone.chapter.background_class %} item.milestone.chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{% if item.milestone.chapter.background_image %}{{ item.milestone.chapter.background_image.url }}{% endif %}');">
+  
+  <div class="hero-body has-text-centered">
+    <div class="container">
+      {% if item.milestone.chapter.image %}
+                  <figure class="media-left is-inline-block">
+              <p class="image is-128x128">
+                <img class="is-rounded" src="{{ item.milestone.chapter.image.url }}">
+              </p>
+            </figure>
+
+      {% endif %}
+      <h1 class="title">
+         {{ item.milestone.chapter.date.date }}
+     </h1>
+     <h3 class="subtitle">
+      {{ item.milestone.chapter.caption }}
+    </h3>
+        </div>
+  </div>
+</div>
+<div class="hero {% if item.milestone.chapter.background_class %} item.milestone.chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{% if item.milestone.chapter.background_image %}{{ item.milestone.chapter.background_image.url }}{% endif %}');">
+  
+  <div class="hero-body">
+    <div class="container has-line">
+
+{% elif item.milestone %}
+
+          {% include "memories/components/milestone.html" %}
+
+ {% elif item.memory %}
+
+{% if item.memory.pictures.0 %}
      <div class="columns">
       <div class="column is-half">
         <div class="box">
           <article class="media">  
             <div class="media-content">
               <div class="content">
-                <img src="{{ memory.picture.image.url }}"><br>
-                  <strong>{{ memory.picture.caption }} </strong><br>
-                  <small> {% trans "Uploaded by" %} {{ memory.picture.user.first_name }} {{ memory.picture.user.last_name }} - {{ memory.picture.pub_date|timesince}}</small>
+                <img src="{{ item.memory.picture.image.url }}"><br>
+                  <strong>{{ item.memory.picture.caption }} </strong><br>
+                  <small> {% trans "Uploaded by" %} {{ item.memory.picture.user.first_name }} {{ item.memory.picture.user.last_name }} - {{ item.memory.picture.pub_date|timesince}}</small>
               </div>
             </div>
           </article>
@@ -29,108 +73,43 @@
       </div>
     </div> 
 
-{% elif memory.text %}
+    {% else %}
+
      <div class="columns">
       <div class="column is-one-third">
         <div class="box">
           <article class="media">
             <figure class="media-left">
               <p class="image is-64x64">
-                <img src="{{ memory.text.user.avatar_url }}">
+                <img src="{{ item.memory.user.avatar_url }}">
               </p>
             </figure>
             <div class="media-content">
+
               <div class="content">
                 <p>
-                  <a href="{% url "user_detail" memory.user %}"><strong>{{ memory.text.user.first_name }} {{ memory.text.user.last_name }}</strong></a> <small>{{ memory.text.user.connection_short }}</small> <small>{{ memory.text.pub_date|timesince}}</small>
+                  <a href="{% url "user_detail" item.memory.user %}"><strong>{{ item.memory.user.first_name }} {{ item.memory.user.last_name }}</strong></a> <small>{{ item.memory.user.connection_short }}</small>
                   <br>
-                  {{ memory.text.long_text }}
+                  {{ item.memory.text }}
+                  <br><small>{{ item.memory.pub_date|timesince}} · <a href="{% url "post_comment" item.pk %}">Reply</a></small>
                 </p>
               </div>
+
+      {% for comment in item.memory.comments.all %}
+
+          {% include "memories/components/comment.html" %}
+
+      {% endfor %}
+
             </div>
           </article>
         </div>
       </div>
     </div> 
-
-{% elif memory.milestone.chapter %}
-    </div>
-  </div>
-</div>
-<div class="hero is-fullheight {% if memory.milestone.chapter.background_class %} memory.milestone.chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{{ memory.milestone.chapter.background_image_url }}');">
-
-{% if forloop.first %}
-<nav class="navbar is-transparent is-fixed-top">
-<div class="container">
-  <div class="navbar-menu">
-
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="field is-grouped">
-          <p class="control"><a href="{% url "memories" %}" class="button is-white is-outlined">Home</a></p>
-          <p class="control"><a href="{% url "timeline" %}" class="button is-white is-outlined">Timeline</a></p>
-          <a class="button is-white is-outlined" href="{% url "post_text" %}">
-              <span class="icon"><i class="fa fa-plus"></i></span>
-              <span>{% trans "Share a memory" %}</span>
-          </a>
-
-
-        <div class="navbar-item has-dropdown is-hoverable">
-
-        <a class="navbar-link is-arrowless">
-         {{ user.first_name }}
-        </a>
-        <div class="navbar-dropdown is-boxed has-background-grey">
-          <a class="navbar-item" href="{% url "user_detail" user %}">
-            Profile
-          </a>
-          <a class="navbar-item" href="#">
-            Settings
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item" href="{% url "logout" %}">
-            Log out
-          </a>
-
-        </div>
-      </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</nav>
 {% endif %}
-  
-  <div class="hero-body">
-    <div class="container has-line">
-      {% if memory.milestone.chapter.image_url %}
-                  <figure class="media-left">
-              <p class="image is-128x128">
-                <img class="is-rounded" src="{{ memory.milestone.chapter.image_url }}">
-              </p>
-            </figure>
-
-      {% endif %}
-      <h1 class="title">
-         {{ memory.milestone.chapter.date.date }}
-     </h1>
-     <h3 class="subtitle">
-      {{ memory.milestone.chapter.caption }}
-    </h3>
-
-{% elif memory.milestone %}
-      {% if memory.milestone.image_url %}
-      <img src="{{ memory.milestone.image_url }}">
-      {% endif %}
-      <h1 class="title">
-         {{ memory.milestone.date.date }}
-     </h1>
-     <h3 class="subtitle">
-      {{ memory.milestone.caption }}
-    </h3>
 {% endif %}
+
+
 
 {% endfor %}
     </div>

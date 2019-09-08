@@ -1,0 +1,19 @@
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block page %}
+
+{% for comment in comments %}
+
+          {% include "memories/components/comment.html" %}
+
+{% endfor %}
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+{% load crispy_forms_tags %}
+
+{% crispy form %}
+
+{% endblock %}

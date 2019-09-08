@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import Text, Picture, Chapter, Milestone
+from .models import TimelineItem, Memory, Picture, Chapter, Milestone
 
-admin.site.register(Text)
+admin.site.register(TimelineItem)
+admin.site.register(Memory)
 admin.site.register(Picture)
 admin.site.register(Chapter)
 admin.site.register(Milestone)

@@ -1,0 +1,50 @@
+{% load i18n %}
+<nav class="navbar is-transparent is-fixed-top">
+<div class="container">
+  <div class="navbar-brand">
+    <div class="navbar-burger burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="navbar-menu">
+    <div class="navbar-start">
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control"><a href="{% url "memories" %}" class="button {% if timeline_items %}is-white is-outlined{% endif %}">Home</a></p>
+          <p class="control"><a href="{% url "timeline" %}" class="button {% if timeline_items %}is-white is-outlined{% endif %}">Timeline</a></p>
+          <a class="button {% if timeline_items %}is-white is-outlined {% else %} is-primary{% endif %}" href="{% url "post_memory" %}">
+              <span class="icon"><i class="fa fa-plus"></i></span>
+              <span>{% trans "Share a memory" %}</span>
+          </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+
+        <a class="navbar-link is-arrowless">
+            <span class="icon"><i class="fa fa-user-circle"></i></span> 
+         <span>{{ user.first_name }}</span>
+        </a>
+        <div class="navbar-dropdown is-boxed">
+          <a class="navbar-item has-text-black" href="{% url "user_detail" user %}">
+            Profile
+          </a>
+          <a class="navbar-item has-text-black" href="#">
+            Settings
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item has-text-black" href="{% url "logout" %}">           
+            Log out
+          </a>
+
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</nav>
