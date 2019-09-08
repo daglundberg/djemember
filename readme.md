@@ -1,6 +1,6 @@
 # djemember
 
-Open source project for creating memorial websites with django
+Open source project for creating beautiful memorial websites with django
 
 ## Getting Started
 
