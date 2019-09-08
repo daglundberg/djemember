@@ -2,6 +2,7 @@ from django import forms
 from .models import Memory, Picture
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django import forms
 
 class TextForm(forms.ModelForm):
     helper = FormHelper()
@@ -23,6 +24,10 @@ class CommentForm(forms.ModelForm):
         model = Memory
         fields = ('text',)
         labels = {"text": "Comment"}
+
+
+class FileFieldForm(forms.Form):
+    file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True})
 
 
 class PictureForm(forms.ModelForm):
