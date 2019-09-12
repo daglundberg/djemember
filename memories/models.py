@@ -33,3 +33,12 @@ class Milestone(TimelineItem):
 class Chapter(Milestone):
     background_image = models.ImageField(upload_to='uploads/', null=True, blank=True)
     background_class = models.CharField(max_length=12, null=True, blank=True)
+    # The "background_class" field exists in case a Chapter could use custom CSS styling, idea is primarily to use Bulma tags like is-dark and is-light, the problem is that:
+    # TODO: background_class is injected straight in to the html and is a huge security vulnerability!
+    # Currently Chapter objects can only be created by administrators so this isn't the biggest deal at the moment but..
+    # ..some kind of html filter should still be implemented, or a list of CSS classes to pick from (instead of a CharField allowing anything).
+
+
+class Quote(Chapter):
+    quotee_name = models.CharField(max_length=50, null=True, blank=True)
+    quotee_description = models.CharField(max_length=100, null=True, blank=True)
