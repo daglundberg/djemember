@@ -1,0 +1,110 @@
+
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block page %}
+<h1 class="title">{% trans "Share a text" %}</h1>
+{% if form.non_field_errors or formset.non_form_errors or formset.errors %}
+<div class="notification is-danger">
+	{{ form.non_field_errors }}
+	{{ formset.non_form_errors }}
+
+	{% for dict in formset.errors %}
+	{% for error in dict.values %}
+	{{ error }}
+	{% endfor %}
+	{% endfor %}
+</div>
+{% endif %}
+
+
+<form method="post">
+
+	{% csrf_token %}
+
+	<div class="columns">
+		<div class="field column">
+			{{ form.text.errors }}
+			
+			{{ form.text }}
+			
+			{% if form.text.help_text %}
+			<p class="help">{{ form.text.help_text|safe }}</p>
+			{% endif %}
+		</div></div>
+		<div class="columns">
+			<div class="field column">
+				{{ form.timeline_date.errors }}
+				<p class="control has-icons-left">
+					{{ form.timeline_date }}
+
+				</p>
+				{% if form.timeline_date.help_text %}
+				<p class="help">{{ form.timeline_date.help_text|safe }}</p>
+				{% endif %}
+			</div>
+
+
+		</div>
+		<div class="columns">
+			{% load index %}
+
+			{{ formset.management_form }}
+			<div class="column">
+
+				<div class="tile is-ancestor" style="flex-wrap: wrap;">
+					{% for form in formset %}
+
+
+
+					<div class="tile is-parent is-3">
+						<div class="tile is-child box ">    
+							<a href="{{ pic_urls|index:forloop.counter0 }}">
+								<p class="image is-3by2">
+									<img src="{{ pic_urls|index:forloop.counter0 }}"/>
+								</p>
+							</a>
+							<br>
+
+							<div class="field">
+								<label class="label">{% trans "Caption" %}</label>
+								<div class="control">
+									{{ form.text.errors }}
+									{{ form.text }}
+
+								</div>
+							</div>
+
+							<div class="field">
+								<label class="label">{% trans "Date" %}</label>
+								<div class="control">
+									{{ form.date_taken.errors }}
+									{{ form.date_taken }}
+								</div>
+							</div>
+
+							<div class="field">
+								<label class="label">{% trans "Location" %}</label>
+								<div class="control">
+									{{ form.location.errors }}
+									{{ form.location }}
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+					{{ form.image }}
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="columns">
+			<div class="control column">
+				<a href="{% url "upload" %}" class="button">{% trans "Upload more pictures" %}</a>
+				<button class="button is-primary is-pulled-right">{% trans "Post" %}</button>
+			</div></div>
+
+		</form>
+
+		{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block title %}Text{% endblock %}
+{% block page %}
+
+<style type="post/css">
+  .image img{height: 100%;object-fit: cover;}
+</style>
+
+{% if posts %}
+{% for post in posts %}
+
+<div class="columns">
+	<div class="column is-one-third">
+<div class="box">
+  <article class="media">
+    <div class="media-left">
+ <figure class="image is-64x64">
+        <img src="{{ post.user.avatar_url }}" alt="Profile picture">
+      </figure>
+    </div>
+    <div class="media-content">   
+    
+          <a href="{% url "user_detail" post.user %}"><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong></a>
+
+
+       <small>{{ post.user.connection_short }}</small> <small>{{ post.pub_date|timesince}}</small>
+          <br>
+         
+         <p> {{ post.text }} </p>
+    
+    </div>
+  </article>
+</div>
+</div>
+</div>
+
+    {% endfor %}
+
+{% else %}
+    <p>{% trans "Nothing to show here yet.." %}</p>
+{% endif %}
+
+{% endblock %}

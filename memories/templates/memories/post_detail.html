@@ -1,0 +1,23 @@
+{% extends 'generic_page.html' %}
+{% load i18n %}
+{% block page %}
+
+
+<div class="box">
+  <article class="media">
+    <div class="media-content">
+      <div class="content">
+  <p>{{ text.text.long_text }}</p>
+      </div>
+    </div>
+  </article>
+</div>
+
+{% for picture in text.picture_set.all %}
+   <img src="{{ picture.url }}" />
+   <p>{{ picture.picture_text }}</p>
+{% endfor %}
+<p>{% trans "Written by" %} <a href="{% url "user_detail" text.user %}"><strong>{{ text.user.first_name }} {{ text.user.last_name }} </strong></a><small>{{ text.user.connection_short }}</small>.</p>
+<p>{% trans "Published" %} {{ text.pub_date}}</p>
+
+{% endblock %}

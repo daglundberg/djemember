@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
-{% load humanize %}
+{% load i18n %}
 {% block title %}Djemember{% endblock %}
 {% block content %}
 
 <section class="hero is-fullheight">
 	<div class="hero-body">
 		<div class="container">
-			<h1 class="title">Welcome!</h1>
-			<h2 class="subtitle">This is a place where we can come together and remember.</h2>
-			<a href="{% url 'login' %}">Login</a>
+		
+		{% if user.is_authenticated %}			
+			<h1 class="title">{% trans "Welcome" %} {{ user.first_name }} !</h1>  
+			<h2 class="subtitle">{% trans "How have you been?" %}</h2>
+		{% else %}
+			<h1 class="title">{% trans "Welcome!" %}</h1>
+			<h2 class="subtitle">{% trans "This is a place where we can come together and remember our loved one." %}</h2>
+			<a href="{% url 'login' %}">{% trans "Login" %}</a>
+		{% endif %}
 		</div>
 	</div>
 </section>

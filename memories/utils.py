@@ -3,6 +3,7 @@ from PIL import Image
 from PIL.ExifTags import TAGS
 from datetime import datetime
 
+
 # This function returns DateTimeOriginal, DateTimeDigitized or DateTime if it can find it in the exif data
 def get_exif_date_time(filename):
     info = Image.open(filename)._getexif()
@@ -39,13 +40,13 @@ def fix_orientation(filename):
         for tag, value in info.items():
             tag_name = TAGS.get(tag, tag)
             if tag_name == 'Orientation':
-                print (value)
+                print(value)
                 if value == 3:
-                    image=image.rotate(180, expand=True)
+                    image = image.rotate(180, expand=True)
                 elif value == 6:
-                    image=image.rotate(270, expand=True)
+                    image = image.rotate(270, expand=True)
                 elif value == 8:
-                    image=image.rotate(90, expand=True)
+                    image = image.rotate(90, expand=True)
                 image.save(filename)
                 image.close()
     return None

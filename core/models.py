@@ -3,13 +3,13 @@ from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
 
 CHOICES = (
-	("father", _('father')),
-	("mother", _('mother')),
-	("sister", _('sister')),
-	("brother", _('brother')),
-	("cousin", _('cousin')),
-	("neighbour", _('neighbour')),
-	)
+    ("father", _('father')),
+    ("mother", _('mother')),
+    ("sister", _('sister')),
+    ("brother", _('brother')),
+    ("cousin", _('cousin')),
+    ("neighbour", _('neighbour')),
+)
 
 
 class User(AbstractUser):

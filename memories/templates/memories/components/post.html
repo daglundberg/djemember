@@ -1,0 +1,28 @@
+  {% load i18n %}
+        <div class="box">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="{{ post.user.avatar_url }}">
+              </p>
+            </figure>
+            <div class="media-content">
+
+              <div class="content">
+                <p>
+                  <a href="{% url "user_detail" post.user %}"><strong>{{ post.user.first_name }} {{ post.user.last_name }}</strong></a> <small>{{ post.user.connection_short }}</small>
+                  <br>
+                  {{ post.text }}
+                  <br><small>{{ post.pub_date|timesince}} · <a href="{% url "comment_create" post.pk %}">{% trans "Comment" %}</a></small>
+                </p>
+              </div>
+
+      {% for comment in post.comments.all %}
+
+          {% include "memories/components/comment.html" %}
+
+      {% endfor %}
+
+            </div>
+          </article>
+        </div>

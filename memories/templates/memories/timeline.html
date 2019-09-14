@@ -11,61 +11,69 @@
 </style>
 
 
-<div class="hero {% if first_chapter.background_class %} first_chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{{ first_chapter.background_image.url }}');">
+<div class="hero {% if first_chapter.background_class %} {{ first_chapter.background_class }} {% else %}is-dark{% endif %} has-background" {% if first_chapter.background_image %} style="background-image: url('{{ first_chapter.background_image.url }}');" {% endif %}>
 
    {% include "memories/components/navbar.html" %}
   
   <div class="hero-body">
     <div class="container">
 
-{% for item in timeline_items %}
+{% for post in timeline_items %}
 
-{% if item.milestone.chapter %}
+{% if post.chapter %}
+
+  
     </div>
   </div>
 </div>
-<div class="hero is-fullheight {% if item.milestone.chapter.background_class %} item.milestone.chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{% if item.milestone.chapter.background_image %}{{ item.milestone.chapter.background_image.url }}{% endif %}');">
+
+<div class="hero is-fullheight {% if post.chapter.background_class %} {{ post.chapter.background_class }} {% else %}is-dark{% endif %} has-background" style="background-image: url('{% if post.chapter.background_image %}{{ post.chapter.background_image.url }}{% endif %}');">
   
   <div class="hero-body has-text-centered">
     <div class="container">
-      {% if item.milestone.chapter.image %}
+      {% if post.chapter.image %}
                   <figure class="media-left is-inline-block">
               <p class="image is-128x128">
-                <img class="is-rounded" src="{{ item.milestone.chapter.image.url }}">
+                <img class="is-rounded" src="{{ post.chapter.image.url }}">
               </p>
             </figure>
 
       {% endif %}
       <h1 class="title">
-         {{ item.milestone.chapter.date.date }}
+         {{ post.chapter.timeline_date.date }}
      </h1>
      <h3 class="subtitle">
-      {{ item.milestone.chapter.caption }}
+      {{ post.chapter.caption }}
     </h3>
         </div>
   </div>
 </div>
-<div class="hero {% if item.milestone.chapter.background_class %} item.milestone.chapter.background_class {% else %}is-dark{% endif %} has-background" style="background-image: url('{% if item.milestone.chapter.background_image %}{{ item.milestone.chapter.background_image.url }}{% endif %}');">
+<div class="hero {% if post.chapter.background_class %} {{ post.chapter.background_class }} {% else %}is-dark{% endif %} has-background" style="background-image: url('{% if post.chapter.background_image %}{{ post.chapter.background_image.url }}{% endif %}');">
   
   <div class="hero-body">
     <div class="container has-line">
 
-{% elif item.milestone %}
+{% elif post.milestone %}
 
           {% include "memories/components/milestone.html" %}
 
- {% elif item.memory %}
+ {% elif post.album %}
 
-{% if item.memory.pictures.0 %}
+  {% for image in post.album.pictures.all %}
+  <img src="{{ image.image.url }}" alt="">
+  
+  {% endfor %}
+
+{% elif post.picture %}
      <div class="columns">
       <div class="column is-half">
         <div class="box">
           <article class="media">  
             <div class="media-content">
               <div class="content">
-                <img src="{{ item.memory.picture.image.url }}"><br>
-                  <strong>{{ item.memory.picture.caption }} </strong><br>
-                  <small> {% trans "Uploaded by" %} {{ item.memory.picture.user.first_name }} {{ item.memory.picture.user.last_name }} - {{ item.memory.picture.pub_date|timesince}}</small>
+                <img src="{{ post.picture.image.url }}"><br>
+                  <strong>{{ post.picture.text }} </strong><br>
+                  <small> {% trans "Uploaded by" %} {{ post.picture.user.first_name }} {{ post.picture.user.last_name }} - {{ post.picture.pub_date|timesince}}</small>
               </div>
             </div>
           </article>
@@ -77,37 +85,13 @@
 
      <div class="columns">
       <div class="column is-one-third">
-        <div class="box">
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src="{{ item.memory.user.avatar_url }}">
-              </p>
-            </figure>
-            <div class="media-content">
 
-              <div class="content">
-                <p>
-                  <a href="{% url "user_detail" item.memory.user %}"><strong>{{ item.memory.user.first_name }} {{ item.memory.user.last_name }}</strong></a> <small>{{ item.memory.user.connection_short }}</small>
-                  <br>
-                  {{ item.memory.text }}
-                  <br><small>{{ item.memory.pub_date|timesince}} · <a href="{% url "post_comment" item.pk %}">Reply</a></small>
-                </p>
-              </div>
+        {% include "memories/components/post.html" %}
 
-      {% for comment in item.memory.comments.all %}
-
-          {% include "memories/components/comment.html" %}
-
-      {% endfor %}
-
-            </div>
-          </article>
-        </div>
       </div>
     </div> 
 {% endif %}
-{% endif %}
+
 
 
 

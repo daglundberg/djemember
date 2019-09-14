@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
-from django.shortcuts import get_object_or_404, render, reverse, redirect
+from django.shortcuts import get_object_or_404, render
 from .models import User
 from .forms import SignUpForm
 
@@ -31,21 +30,3 @@ def landingpage(request):
 def user_detail(request, username):
     user = get_object_or_404(User, username=username)
     return render(request, 'user_detail.html', {'user': user})
-
-
-#     public_pictures = Picture.objects.filter(is_featured_publicly=True)
-#     public_memories = Memory.objects.filter(is_featured_publicly=True)
-
-#     if public_pictures.count() > 0:
-#         random_picture = public_pictures[randint(0, public_pictures.count() - 1)]
-#     else:
-#         random_picture = "No public pictures."
-
-#     if public_memories.count() > 0:
-#         random_memory = public_memories[randint(0, public_memories.count() - 1)]
-#     else:
-#         random_memory = "No public memories."
-
-#     return render(request, 'minnesboken/landingpage.html', {
-#                            'random_picture': random_picture,
-#                            'random_memory': random_memory})

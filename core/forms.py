@@ -1,7 +1,5 @@
-from django import forms
-from django.forms import NumberInput, TextInput, Select, DateInput, EmailInput, PasswordInput
+from django.forms import TextInput, EmailInput, PasswordInput
 from .models import User
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.forms import UserCreationForm
 
 
