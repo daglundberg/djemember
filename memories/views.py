@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Post, Picture, Chapter
+from .models import Post, Picture, Chapter, Album
 from .forms import FileFieldForm
 from .utils import get_exif_date_time, fix_orientation, get_exif_gps_data
 
@@ -42,7 +42,7 @@ def images_upload(request):
                 date = get_exif_date_time(p.image.path)
                 gpsdata = get_exif_gps_data(p.image.path)
                 if date is not None:
-                    p.date = date
+                    p.date_taken = date
                 if gpsdata is not None:
                     p.gps_data = gpsdata
                 p.save()

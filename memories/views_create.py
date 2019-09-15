@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 from django.forms import formset_factory
 from django.utils import timezone
 from .models import Post, Picture
@@ -66,7 +65,7 @@ def album_create(request):
                     pic.is_in_album = album
                     pic.save()
             messages.success(request, 'Saved "' + album.text + '"" !')
-            return HttpResponseRedirect(request.path_info)
+            return redirect('timeline')
     else:
         formset = PictureFormSet(initial=unpublished_pictures.values())
         form = AlbumForm()

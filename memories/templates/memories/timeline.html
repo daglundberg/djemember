@@ -3,13 +3,15 @@
 {% block navbar %} {% endblock %}
 {% block content %}
 {% load i18n %}
+ <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+ <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.js"></script>
 <style type="text/css">
   .has-background{background-position: center center;background-repeat:no-repeat;background-attachment:fixed;background-size:cover;}
   .has-line{border-left-width:4px;border-left-style:dashed;padding-left:12px;}
   .image img{height: 100%;object-fit: cover;}
   .is-rounded{border-width:3px;border-style:solid;}
-</style>
 
+</style>
 
 <div class="hero {% if first_chapter.background_class %} {{ first_chapter.background_class }} {% else %}is-dark{% endif %} has-background" {% if first_chapter.background_image %} style="background-image: url('{{ first_chapter.background_image.url }}');" {% endif %}>
 
@@ -59,10 +61,7 @@
 
  {% elif post.album %}
 
-  {% for image in post.album.pictures.all %}
-  <img src="{{ image.image.url }}" alt="">
-  
-  {% endfor %}
+{% include "memories/components/album.html" with album=post.album%}
 
 {% elif post.picture %}
      <div class="columns">
@@ -92,11 +91,9 @@
     </div> 
 {% endif %}
 
-
-
-
 {% endfor %}
     </div>
   </div>
 </div>
+
 {% endblock %}

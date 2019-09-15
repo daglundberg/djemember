@@ -2,7 +2,7 @@
 {% extends 'generic_page.html' %}
 {% load i18n %}
 {% block page %}
-<h1 class="title">{% trans "Share a text" %}</h1>
+<h1 class="title">{% trans "Create album" %}</h1>
 {% if form.non_field_errors or formset.non_form_errors or formset.errors %}
 <div class="notification is-danger">
 	{{ form.non_field_errors }}
@@ -20,31 +20,11 @@
 <form method="post">
 
 	{% csrf_token %}
-
 	<div class="columns">
-		<div class="field column">
-			{{ form.text.errors }}
-			
-			{{ form.text }}
-			
-			{% if form.text.help_text %}
-			<p class="help">{{ form.text.help_text|safe }}</p>
-			{% endif %}
-		</div></div>
-		<div class="columns">
-			<div class="field column">
-				{{ form.timeline_date.errors }}
-				<p class="control has-icons-left">
-					{{ form.timeline_date }}
-
-				</p>
-				{% if form.timeline_date.help_text %}
-				<p class="help">{{ form.timeline_date.help_text|safe }}</p>
-				{% endif %}
-			</div>
-
-
-		</div>
+		<div class="column">
+				<a href="{% url "upload" %}" class="button">{% trans "Upload pictures" %}</a>
+</div>
+				</div>
 		<div class="columns">
 			{% load index %}
 
@@ -60,7 +40,7 @@
 						<div class="tile is-child box ">    
 							<a href="{{ pic_urls|index:forloop.counter0 }}">
 								<p class="image is-3by2">
-									<img src="{{ pic_urls|index:forloop.counter0 }}"/>
+									<img style="object-fit: cover;" src="{{ pic_urls|index:forloop.counter0 }}"/>
 								</p>
 							</a>
 							<br>
@@ -99,10 +79,34 @@
 				</div>
 			</div>
 		</div>
+	<div class="columns">
+		<div class="field column">
+			{{ form.text.errors }}
+			<label class="label">{% trans "Text" %}</label>
+			{{ form.text }}
+			
+			{% if form.text.help_text %}
+			<p class="help">{{ form.text.help_text|safe }}</p>
+			{% endif %}
+		</div></div>
+		<div class="columns">
+			<div class="field column">
+				{{ form.timeline_date.errors }}
+				<p class="control has-icons-left">
+																<label class="label">{% trans "Timeline date" %}</label>
+					{{ form.timeline_date }}
+
+				</p>
+				{% if form.timeline_date.help_text %}
+				<p class="help">{{ form.timeline_date.help_text|safe }}</p>
+				{% endif %}
+			</div>
+
+
+		</div>
 		<div class="columns">
 			<div class="control column">
-				<a href="{% url "upload" %}" class="button">{% trans "Upload more pictures" %}</a>
-				<button class="button is-primary is-pulled-right">{% trans "Post" %}</button>
+				<button class="button is-primary">{% trans "Create album" %}</button>
 			</div></div>
 
 		</form>

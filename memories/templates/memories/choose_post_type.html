@@ -3,18 +3,47 @@
 {% block page %}
 
 <h1 class="title">{% trans "Share a memory" %}</h1>
+{% blocktrans %}
+<p>
+	We invite you to share a memory you have of [insert name], weather it's a <strong>memory</strong>, a <strong>story</strong>, a <strong>picture</strong>, a <strong>small anecdote</strong>, or simply a poem, a quote or your thoughts and feelings you are very welcome to share any and all of it with us here.
+<br><br>
+	[insert name] was very active and lived his life in many places and met many people and made many friends along the way. We hope that this will be a place were we can collect some more of all that we have missed of him while he was away.</p>
+{% endblocktrans %}
 <div class="columns">
+
 	<div class="column">
-		<div class="box">
-			<div class="subtitle">Memory</div>
-		</div>
+		<a href="{% url "album_create" %}">
+			<span>
+				<div class="box">
+					<div class="subtitle">Pictures</div>
+					<p>{% trans "Upload multiple pictures" %}</p>
+				</div>
+			</span>
+		</a>
 	</div>
+
 	<div class="column">
-		<div class="box">
-			<div class="subtitle">Album</div>
-			<p>Upload multiple pictures that go together</p>
-		</div>
+		<a href="{% url "album_create" %}">
+			<span>
+				<div class="box">
+					<div class="subtitle">Album</div>
+					<p>{% trans "Upload multiple pictures that belong together" %}</p>
+				</div>
+			</span>
+		</a>
 	</div>
+	
+	<div class="column">
+		<a href="{% url "post_create" %}">
+			<span>
+				<div class="box">
+					<div class="subtitle">Post</div>
+					<p>{% trans "Create a post" %}</p>
+				</div>
+			</span>
+		</a>
+	</div>
+	
 </div>
 <div class="columns">
 	<div class="column">

@@ -1,0 +1,37 @@
+        <div class="box">
+          <article class="media">
+            <div class="media-content">
+
+              <div class="content">
+
+  {% if album.title %}
+  	<h1 class="title">{{ album.title }}</h1>
+  {% endif %}
+  <div class="tile is-ancestor" style="flex-wrap: wrap;">
+  {% for image in album.pictures.all %}
+  <div class="tile is-parent is-3" >
+  <div class="tile is-child ">
+<a href="{{ image.image.url }}">
+  <p class="image is-square">
+      <img style="object-fit: cover;"  src="{{ image.image.url }}" alt="">
+  </p>
+ </a>
+  <p>{{ image.text }}</p>
+  </div>  
+</div>
+  {% endfor %}
+
+</div>
+         
+    {% if album.text %}
+  	<p class="has-text-black">{{ album.text }}</p>
+  {% endif %}
+              <p class="image is-64x64">
+                <img src="{{ album.user.avatar_url }}">
+              </p>
+           	{{ album.user.first_name }} {{ album.user.last_name }}
+</div>
+</div>
+
+          </article>
+        </div>
